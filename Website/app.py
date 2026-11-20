@@ -25,8 +25,10 @@ st.set_page_config(
     initial_sidebar_state="collapsed",
 )
 
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 CSV_PATH = BASE_DIR / "Data" / "output" / "nfl_rankings_2026.csv"
+METRICS_PATH = BASE_DIR / "Data" / "output" / "team_metrics_2026.csv"
 HISTORY_DIR = BASE_DIR / "Data" / "history"
 HISTORY_PATH = HISTORY_DIR / "snapshots.json"
 
@@ -49,6 +51,15 @@ WEEKLY_DIR = BASE_DIR / "Data" / "weekly"
 RESULTS_PATH = WEEKLY_DIR / "game_results.json"
 SCHEDULE_PATH = WEEKLY_DIR / "schedule.json"
 
+@st.cache_data
+def load_team_metrics():
+    if not METRICS_PATH.exists():
+        return pd.DataFrame()
+
+    try:
+        return pd.read_csv(METRICS_PATH)
+    except (OSError, pd.errors.ParserError):
+        return pd.DataFrame()
 
 def read_json_list(path):
     if not path.exists():
@@ -298,18 +309,35 @@ NFL_DATA_STATUS = {
 }
 
 
+
 @st.cache_data(ttl=900, show_spinner=False)
 def load_espn_games():
     """Download the NFL regular-season schedule and results."""
-    request = urllib.request.Request(
-        ESPN_SCOREBOARD_URL,
-        headers={"User-Agent": "Mozilla/5.0 NFL-Ratings-App"},
-    )
+    base_url = ESPN_SCOREBOARD_URL.split("?")[0]
+    events_by_id = {}
 
-    with urllib.request.urlopen(request, timeout=25) as response:
-        payload = json.loads(response.read().decode("utf-8"))
+    # ESPN rejects date ranges, so retrieve each regular-season
+    # week separately.
+    for week_number in range(1, 19):
+        url = (
+            f"{base_url}?dates={NFL_SEASON}"
+            f"&seasontype=2&week={week_number}&limit=1000"
+        )
 
-    events = payload.get("events", [])
+        request = urllib.request.Request(
+            url,
+            headers={"User-Agent": "Mozilla/5.0 NFL-Ratings-App"},
+        )
+
+        with urllib.request.urlopen(request, timeout=25) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+
+        for event in payload.get("events", []):
+            game_id = str(event.get("id", "")).strip()
+            if game_id:
+                events_by_id[game_id] = event
+
+    events = list(events_by_id.values())
     games = []
 
     aliases = {
@@ -584,6 +612,7 @@ def read_history():
         return []
 
 
+
 def save_snapshot(frame):
     """Save only when ratings content changes; never fabricate past data."""
     if frame is None or frame.empty:
@@ -609,15 +638,20 @@ rankings = (
     load_rankings(str(CSV_PATH), CSV_PATH.stat().st_mtime)
     if CSV_PATH.exists() else None
 )
-
+team_metrics = load_team_metrics()
 
 def get_team_row(code, data=None):
     source = rankings if data is None else data
+
     if source is None:
         return None
-    found = source[source["team"] == code]
-    return None if found.empty else found.iloc[0]
 
+    code = str(code).upper()
+    csv_code = {"LAR": "LA"}.get(code, code)
+
+    found = source[source["team"].astype(str).str.upper() == csv_code]
+
+    return None if found.empty else found.iloc[0]
 
 def logo(code, width=62):
     info = TEAMS[code]
@@ -655,21 +689,46 @@ def go(page, team=None, entrance=False):
 
 
 def reset_page_scroll():
-    """Use Streamlit's built-in HTML element; no component iframe is created."""
+    """Reset all Streamlit page scroll containers after navigation."""
     if st.session_state.get("scroll_to_top", False):
         st.html(
             """
             <script>
             (() => {
-                window.scrollTo(0, 0);
-                document.documentElement.scrollTop = 0;
-                document.body.scrollTop = 0;
-                const main = document.querySelector("section.main");
-                if (main) main.scrollTop = 0;
-                const app = document.querySelector(
-                    '[data-testid="stAppViewContainer"]'
-                );
-                if (app) app.scrollTop = 0;
+                const scrollTop = () => {
+                    const selectors = [
+                        '[data-testid="stMain"]',
+                        '[data-testid="stAppViewContainer"]',
+                        '[data-testid="stMainBlockContainer"]',
+                        'section.main',
+                        'main'
+                    ];
+
+                    selectors.forEach(selector => {
+                        document.querySelectorAll(selector).forEach(element => {
+                            element.scrollTop = 0;
+                        });
+                    });
+
+                    document.querySelectorAll("*").forEach(element => {
+                        const style = window.getComputedStyle(element);
+                        if (
+                            (style.overflowY === "auto" ||
+                             style.overflowY === "scroll") &&
+                            element.scrollHeight > element.clientHeight
+                        ) {
+                            element.scrollTop = 0;
+                        }
+                    });
+
+                    window.scrollTo(0, 0);
+                };
+
+                scrollTop();
+                requestAnimationFrame(scrollTop);
+                setTimeout(scrollTop, 100);
+                setTimeout(scrollTop, 300);
+                setTimeout(scrollTop, 600);
             })();
             </script>
             """,
@@ -1118,13 +1177,152 @@ def section(text):
     st.markdown(f'<div class="section-title">{html.escape(text)}</div>', unsafe_allow_html=True)
 
 
-def metric(label, value, suffix=""):
+def metric(label, value, suffix="", team_color=None):
+    style = ""
+
+    if team_color:
+        color = html.escape(str(team_color), quote=True)
+        style = (
+            f' style="background: linear-gradient(145deg, {color}35, #111110);'
+            f' border: 1px solid {color}88;"'
+        )
+
     st.markdown(
-        f'<div class="metric-card"><div class="metric-label">{html.escape(str(label))}</div>'
-        f'<div class="metric-number">{html.escape(str(value))}{suffix}</div></div>',
+        f'<div class="metric-card"{style}>'
+        f'<div class="metric-label">{html.escape(str(label))}</div>'
+        f'<div class="metric-number">{html.escape(str(value))}{suffix}</div>'
+        f'</div>',
         unsafe_allow_html=True,
     )
 
+def get_leader_strengths(team_code):
+    if team_metrics.empty:
+        return []
+
+    team_code = {"LAR": "LA"}.get(team_code, team_code)
+
+    leader_rows = team_metrics[
+        team_metrics["team"].astype(str) == team_code
+    ]
+
+    if leader_rows.empty:
+        return []
+
+    candidates = [
+        {
+            "label": "OFFENSIVE EPA / PLAY",
+            "column": "off_epa_per_play",
+            "category": "OFFENSE",
+            "higher": True,
+            "format": "number",
+        },
+        {
+            "label": "RED-ZONE TD RATE",
+            "column": "red_zone_td_rate",
+            "category": "OFFENSE",
+            "higher": True,
+            "format": "percent",
+        },
+        {
+            "label": "THIRD-DOWN CONVERSION",
+            "column": "third_down_conversion_rate",
+            "category": "OFFENSE",
+            "higher": True,
+            "format": "percent",
+        },
+        {
+            "label": "EXPLOSIVE-PLAY RATE",
+            "column": "overall_explosive_rate",
+            "category": "OFFENSE",
+            "higher": True,
+            "format": "percent",
+        },
+        {
+            "label": "DEFENSIVE EPA / PLAY",
+            "column": "def_epa_allowed_per_play",
+            "category": "DEFENSE",
+            "higher": False,
+            "format": "number",
+        },
+        {
+            "label": "YARDS ALLOWED / PLAY",
+            "column": "def_yards_allowed_per_play",
+            "category": "DEFENSE",
+            "higher": False,
+            "format": "number",
+        },
+        {
+            "label": "EXPLOSIVE-PLAY RATE ALLOWED",
+            "column": "overall_explosive_rate_allowed",
+            "category": "DEFENSE",
+            "higher": False,
+            "format": "percent",
+        },
+        {
+            "label": "PUNT INSIDE-20 RATE",
+            "column": "punt_inside_twenty_rate",
+            "category": "SPECIAL TEAMS",
+            "higher": True,
+            "format": "percent",
+        },
+        {
+            "label": "POINT DIFFERENTIAL / GAME",
+            "column": "on_field_avg_point_differential",
+            "category": "ON-FIELD",
+            "higher": True,
+            "format": "number",
+        },
+    ]
+
+    strengths = []
+
+    for candidate in candidates:
+        column = candidate["column"]
+
+        if column not in team_metrics.columns:
+            continue
+
+        values = pd.to_numeric(team_metrics[column], errors="coerce")
+        if values.notna().sum() < 16:
+            continue
+
+        rank = values.rank(
+            ascending=not candidate["higher"],
+            method="min"
+        )
+
+        team_index = leader_rows.index[0]
+        team_rank = rank.loc[team_index]
+
+        if pd.isna(team_rank):
+            continue
+
+        candidate["rank"] = int(team_rank)
+        candidate["value"] = float(leader_rows.iloc[0][column])
+        strengths.append(candidate)
+
+    strengths.sort(key=lambda item: item["rank"])
+
+    selected = []
+    categories = set()
+
+    for strength in strengths:
+        if strength["category"] in categories:
+            continue
+
+        selected.append(strength)
+        categories.add(strength["category"])
+
+        if len(selected) == 3:
+            break
+
+    for strength in strengths:
+        if len(selected) == 3:
+            break
+        if strength not in selected:
+            selected.append(strength)
+
+    return selected
 
 def rank_row(row, button_key=None):
     code = str(row["team"]).upper()
@@ -1194,8 +1392,10 @@ def footer():
 # HOME / BROADCAST HQ
 # ============================================================
 
+
 def render_home():
     hero("THE LEAGUE. REIMAGINED.", "WHO RUNS", "THE NFL?", "32 TEAMS. ONE RATINGS ENGINE. NO OPINIONS REQUIRED.")
+
     if rankings is None:
         st.error(f"Rankings CSV could not be loaded. Expected: {CSV_PATH}")
         return
@@ -1206,9 +1406,28 @@ def render_home():
     leader_info = TEAMS.get(leader_code, {})
     top = ordered.head(5)
     bottom = ordered.tail(5).sort_values("rank", ascending=False)
+    schedule = get_schedule()
+    results = get_results()
+
+    completed_ids = {
+        str(game.get("schedule_id") or game.get("id"))
+        for game in results
+        if game.get("schedule_id") or game.get("id")
+    }
+
+    remaining_weeks = [
+        int(game["week"])
+        for game in schedule
+        if game.get("week") is not None
+           and str(game.get("id", "")) not in completed_ids
+    ]
+
+    current_week = min(remaining_weeks) if remaining_weeks else "OFFSEASON"
 
     st.markdown('<div class="micro">CURRENT LEAGUE LEADER</div>', unsafe_allow_html=True)
+
     a, b = st.columns([2, 1])
+
     with a:
         st.markdown(
             f'<div class="profile-hero" style="--team:{leader_info.get("color","#B99A5A")}">'
@@ -1219,85 +1438,114 @@ def render_home():
             f'<div class="micro">OVERALL RATING</div></div></div></div>',
             unsafe_allow_html=True,
         )
+
         if st.button(f"ENTER THE {leader_code} PROFILE →", key="home_leader"):
             go("PROFILE", leader_code, True)
+
     with b:
-        metric("TEAMS RATED", len(ordered))
-        metric("LEAGUE AVERAGE", f'{ordered["overall_rating"].mean():.1f}')
-        metric("TOP-TO-BOTTOM GAP", f'{ordered.iloc[0]["overall_rating"] - ordered.iloc[-1]["overall_rating"]:.1f}')
+        team_color = leader_info.get("color", "#B99A5A")
+
+        metric("CURRENT WEEK", current_week, team_color=team_color)
+
+        leader_strengths = get_leader_strengths(leader_code)
+
+        for strength in leader_strengths:
+            if strength["format"] == "percent":
+                display_value = f'{strength["value"]:.1%}'
+            else:
+                display_value = f'{strength["value"]:.3f}'
+
+            metric(
+                strength["label"],
+                display_value,
+                team_color=team_color,
+            )
+
+        metric(
+            "TOP-TO-BOTTOM GAP",
+            f'{ordered.iloc[0]["overall_rating"] - ordered.iloc[-1]["overall_rating"]:.1f}',
+            team_color=team_color,
+        )
 
     section("THE TOP FIVE")
+
     for _, row in top.iterrows():
         rank_row(row, f"home_top_{row['team']}")
 
     section("THE BOTTOM FIVE")
+
     for _, row in bottom.iterrows():
         rank_row(row, f"home_bottom_{row['team']}")
 
-    section("CURRENT LEAGUE STANDINGS")
-
-    standings = get_standings()
-
-    standings_display = standings[
-        ["Team", "W", "L", "T", "PCT", "DIFF"]
-    ].head(8).copy()
-
-    standings_display["PCT"] = standings_display["PCT"].map(
-        lambda value: f"{value:.3f}"
-    )
-
-    st.dataframe(
-        standings_display,
-        use_container_width=True,
-        hide_index=True,
-    )
-
-    section("NEXT UP")
-
-    upcoming = get_upcoming_games()
-
-    if not upcoming:
-        st.info("No upcoming games have been added yet. Visit WEEKLY to manage the schedule.")
-    else:
-        for game in upcoming[:3]:
-            home = game["home"]
-            away = game["away"]
-
-            st.markdown(
-                f'<div class="panel">'
-                f'<div class="micro">WEEK {game.get("week", "?")} '
-                f'/ {html.escape(game.get("date", ""))} '
-                f'/ {html.escape(game.get("kickoff", ""))}</div>'
-                f'<div style="display:flex;align-items:center;justify-content:space-around;'
-                f'gap:15px;flex-wrap:wrap;text-align:center">'
-                f'<div>{logo(away,60)}<b>{html.escape(TEAMS[away]["name"])}</b></div>'
-                f'<div class="metric-number" style="font-size:35px">AT</div>'
-                f'<div>{logo(home,60)}<b>{html.escape(TEAMS[home]["name"])}</b></div>'
-                f'</div></div>',
-                unsafe_allow_html=True,
-            )
     section("AROUND THE LEAGUE")
-    award_specs = [
-        ("TOP-RATED OFFENSE", "offensive_rating"),
-        ("TOP-RATED DEFENSE", "defensive_rating"),
-        ("TOP SPECIAL TEAMS", "special_teams_rating"),
-        ("TOP DISCIPLINE", "discipline_rating"),
-    ]
-    cols = st.columns(4)
-    for col, (label, rating_col) in zip(cols, award_specs):
-        row = rankings.loc[rankings[rating_col].idxmax()]
-        code = str(row["team"])
-        with col:
-            st.markdown(
-                f'<div class="panel" style="text-align:center">{logo(code,72)}'
-                f'<div class="micro">{label}</div><b>{html.escape(TEAMS[code]["name"])}</b>'
-                f'<div class="metric-number">{float(row[rating_col]):.1f}</div></div>',
-                unsafe_allow_html=True,
-            )
-            if st.button(f"VIEW {code}", key=f"award_{label}"):
-                go("PROFILE", code, True)
 
-    st.caption("League spotlights are calculated from the current ratings file. They are not claims about on-field weekly results.")
+    award_specs = [
+        ("OFFENSE", "offensive_rating"),
+        ("DEFENSE", "defensive_rating"),
+        ("SPECIAL TEAMS", "special_teams_rating"),
+        ("DISCIPLINE", "discipline_rating"),
+        ("ON-FIELD", "on_field_rating"),
+    ]
+
+    category_rows = [
+        (award_specs[:2], False),
+        (award_specs[2:4], False),
+        (award_specs[4:], True),
+    ]
+
+    for row_specs, centered in category_rows:
+        if centered:
+            _, category_col, _ = st.columns([1, 2, 1])
+            category_columns = [category_col]
+        else:
+            category_columns = st.columns(2)
+
+        for col, (label, rating_col) in zip(category_columns, row_specs):
+            with col:
+
+                # Clickable category heading
+                st.markdown(
+                    f'<div class="section-title" style="cursor:pointer;" '
+                    f'title="View all 32 teams">'
+                    f'TOP FIVE — {html.escape(label)} <span style="font-size:0.75em;opacity:0.65;">↗</span></div>',
+                    unsafe_allow_html=True,
+                )
+
+                # Top five teams in this category
+                category_top = rankings.sort_values(
+                    rating_col,
+                    ascending=False
+                ).head(5)
+
+                for position, (_, row) in enumerate(category_top.iterrows(), start=1):
+                    code = {"LA": "LAR"}.get(
+                        str(row["team"]),
+                        str(row["team"])
+                    )
+
+                    team_name = TEAMS.get(code, {}).get("name", code)
+                    rating = float(row[rating_col])
+
+                    left, right = st.columns([1, 5])
+
+                    with left:
+                        st.markdown(
+                            logo(code, 48),
+                            unsafe_allow_html=True,
+                        )
+
+                    with right:
+                        if st.button(
+                                f"#{position}  {team_name.upper()} — {rating:.1f} →",
+                                key=f"home_{rating_col}_{code}",
+                                use_container_width=True,
+                        ):
+                            go("PROFILE", code, True)
+
+    st.caption(
+        "Category leaderboards are calculated from the current ratings file. "
+        "Select any team to view its profile."
+    )
 
 
 # ============================================================
@@ -1346,23 +1594,346 @@ def render_teams():
                     if st.button(f"ENTER {code} →", key=f"team_{code}", use_container_width=True):
                         go("PROFILE", code, True)
 
+
+
+def render_dna_heatmap(title, zones, row, frame, defensive=False):
+    st.markdown(f"#### {title}")
+
+    cells = []
+
+    for label, column, plays_column in zones:
+        if column not in frame.columns or plays_column not in frame.columns:
+            continue
+
+        team_value = pd.to_numeric(
+            pd.Series([row.get(column)]), errors="coerce"
+        ).iloc[0]
+
+        league_values = pd.to_numeric(frame[column], errors="coerce")
+        play_counts = pd.to_numeric(frame[plays_column], errors="coerce")
+
+        valid = (
+            league_values.notna()
+            & play_counts.notna()
+            & (play_counts > 0)
+        )
+
+        if pd.isna(team_value) or not valid.any():
+            continue
+
+        league_average = (
+            (league_values[valid] * play_counts[valid]).sum()
+            / play_counts[valid].sum()
+        )
+
+        difference = team_value - league_average
+
+        # For defense, lower EPA allowed is better.
+        if defensive:
+            difference *= -1
+
+        if difference > 0.025:
+            background = "#176b45"
+        elif difference < -0.025:
+            background = "#9e3030"
+        else:
+            background = "#9b862f"
+
+        cells.append({
+            "label": label,
+            "team": team_value,
+            "league": league_average,
+            "plays": row.get(plays_column, 0),
+            "background": background,
+        })
+
+    if not cells:
+        st.info("Field-zone data is unavailable.")
+        return
+
+    # Deep passing on top, short passing underneath.
+    if any(
+        cell["label"].startswith(("Short", "Deep"))
+        for cell in cells
+    ):
+        cells.sort(
+            key=lambda item: (
+                0 if item["label"].startswith("Deep") else 1,
+                item["label"]
+            )
+        )
+
+    html_cells = ""
+
+    for cell in cells:
+        html_cells += f"""
+        <div style="
+            background:{cell['background']};
+            border:1px solid rgba(255,255,255,0.18);
+            border-radius:5px;
+            padding:16px 8px;
+            text-align:center;
+            color:white;
+            min-height:105px;
+        ">
+            <div style="font-size:13px;font-weight:700;">
+                {html.escape(cell['label'].upper())}
+            </div>
+            <div style="font-size:25px;font-weight:800;margin:8px 0;">
+                {cell['team']:+.3f}
+            </div>
+            <div style="font-size:11px;opacity:0.9;">
+                League: {cell['league']:+.3f}
+            </div>
+            <div style="font-size:10px;opacity:0.75;margin-top:5px;">
+                {int(cell['plays'])} plays
+            </div>
+        </div>
+        """
+
+    st.markdown(
+        f"""
+        <div style="
+            display:grid;
+            grid-template-columns:repeat(3,minmax(0,1fr));
+            gap:7px;
+            padding:8px;
+            background:#17251f;
+            border:2px solid #b08d45;
+            border-radius:8px;
+        ">
+            {html_cells}
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.caption(
+        "Green = better than league average · "
+        "Gold = near league average · "
+        "Red = worse than league average"
+    )
+
+# ============================================================
+# TEAM DNA ANALYSIS
+# ============================================================
+
+DNA_METRICS = {
+    "Offensive Efficiency": {
+        "off_epa_per_play": ("EPA per Play", True),
+        "off_success_rate": ("Success Rate", True),
+        "off_yards_per_play": ("Yards per Play", True),
+        "pass_epa_per_play": ("Passing EPA per Play", True),
+        "rush_epa_per_play": ("Rushing EPA per Play", True),
+        "overall_explosive_rate": ("Explosive Play Rate", True),
+        "off_early_down_success_rate": ("Early Down Success", True),
+        "off_first_down_success_rate": ("First Down Success", True),
+        "off_second_down_success_rate": ("Second Down Success", True),
+    },
+    "Defensive Performance": {
+        "def_epa_allowed_per_play": ("EPA Allowed per Play", False),
+        "def_success_rate_allowed": ("Success Rate Allowed", False),
+        "def_yards_allowed_per_play": ("Yards Allowed per Play", False),
+        "pass_epa_allowed_per_play": ("Passing EPA Allowed", False),
+        "rush_epa_allowed_per_play": ("Rushing EPA Allowed", False),
+        "overall_explosive_rate_allowed": ("Explosive Play Rate Allowed", False),
+        "def_early_down_success_allowed": ("Early Down Success Allowed", False),
+        "def_first_down_success_allowed": ("First Down Success Allowed", False),
+        "def_second_down_success_allowed": ("Second Down Success Allowed", False),
+    },
+    "Situational Offense": {
+        "dna_third_down_conversion_rate": ("Third Down Conversion", True),
+        "dna_fourth_down_conversion_rate": ("Fourth Down Conversion", True),
+        "dna_red_zone_td_rate": ("Red Zone TD Rate", True),
+        "dna_red_zone_scoring_rate": ("Red Zone Scoring Rate", True),
+    },
+    "Situational Defense": {
+        "dna_third_down_conversion_rate_allowed": ("Third Down Conversion Allowed", False),
+        "dna_fourth_down_conversion_rate_allowed": ("Fourth Down Conversion Allowed", False),
+        "dna_red_zone_td_rate_allowed": ("Red Zone TD Rate Allowed", False),
+        "dna_red_zone_scoring_rate_allowed": ("Red Zone Scoring Rate Allowed", False),
+    },
+}
+
+DNA_TENDENCIES = {
+    "Offensive Identity": {
+        "dna_pass_rate": "Pass Rate",
+        "dna_rush_rate": "Rush Rate",
+        "dna_shotgun_rate": "Shotgun Usage",
+        "dna_no_huddle_rate": "No-Huddle Usage",
+        "dna_short_pass_rate": "Short Pass Rate",
+        "dna_deep_pass_rate": "Deep Pass Rate",
+        "dna_run_left_rate": "Runs Left",
+        "dna_run_middle_rate": "Runs Middle",
+        "dna_run_right_rate": "Runs Right",
+    },
+    "Defensive Identity": {
+        "dna_pass_rate_faced": "Opponent Pass Rate",
+        "dna_rush_rate_faced": "Opponent Rush Rate",
+        "dna_shotgun_rate_faced": "Opponent Shotgun Usage",
+        "dna_no_huddle_rate_faced": "Opponent No-Huddle Usage",
+        "dna_short_pass_rate_faced": "Opponent Short Pass Rate",
+        "dna_deep_pass_rate_faced": "Opponent Deep Pass Rate",
+        "dna_runs_left_rate_faced": "Opponent Runs Left",
+        "dna_runs_middle_rate_faced": "Opponent Runs Middle",
+        "dna_runs_right_rate_faced": "Opponent Runs Right",
+    },
+}
+
+
+def get_dna_percentile(frame, column, value, higher_is_better=True):
+    values = pd.to_numeric(frame[column], errors="coerce").dropna()
+    if values.empty or pd.isna(value):
+        return None
+
+    percentile = (values <= value).mean() * 100
+
+    if not higher_is_better:
+        percentile = 100 - percentile
+
+    return percentile
+
+
+def get_dna_strengths_weaknesses(row, frame, limit=3):
+    results = []
+
+    for group, metrics in DNA_METRICS.items():
+        for column, (label, higher_is_better) in metrics.items():
+            if column not in frame.columns:
+                continue
+
+            value = pd.to_numeric(
+                pd.Series([row.get(column)]),
+                errors="coerce"
+            ).iloc[0]
+
+            percentile = get_dna_percentile(
+                frame, column, value, higher_is_better
+            )
+
+            if percentile is None:
+                continue
+
+            results.append({
+                "group": group,
+                "label": label,
+                "value": value,
+                "percentile": percentile,
+            })
+
+    results.sort(key=lambda item: item["percentile"], reverse=True)
+
+    strengths = results[:limit]
+    weaknesses = sorted(
+        results,
+        key=lambda item: item["percentile"]
+    )[:limit]
+
+    return strengths, weaknesses
+
+
+def get_most_similar_teams(code, frame, limit=3):
+    similarity_columns = [
+        # Offensive identity
+        "dna_pass_rate",
+        "dna_rush_rate",
+        "dna_shotgun_rate",
+        "dna_no_huddle_rate",
+        "dna_short_pass_rate",
+        "dna_deep_pass_rate",
+        "dna_run_left_rate",
+        "dna_run_middle_rate",
+        "dna_run_right_rate",
+
+        # Defensive identity
+        "dna_pass_rate_faced",
+        "dna_rush_rate_faced",
+        "dna_shotgun_rate_faced",
+        "dna_no_huddle_rate_faced",
+        "dna_short_pass_rate_faced",
+        "dna_deep_pass_rate_faced",
+        "dna_runs_left_rate_faced",
+        "dna_runs_middle_rate_faced",
+        "dna_runs_right_rate_faced",
+
+        # Efficiency
+        "off_epa_per_play",
+        "off_success_rate",
+        "off_yards_per_play",
+        "def_epa_allowed_per_play",
+        "def_success_rate_allowed",
+        "def_yards_allowed_per_play",
+
+        # Situational performance
+        "dna_third_down_conversion_rate",
+        "dna_fourth_down_conversion_rate",
+        "dna_red_zone_td_rate",
+        "dna_third_down_conversion_rate_allowed",
+        "dna_fourth_down_conversion_rate_allowed",
+        "dna_red_zone_td_rate_allowed",
+    ]
+
+    columns = [
+        column for column in similarity_columns
+        if column in frame.columns
+    ]
+
+    data = frame[["team"] + columns].copy()
+
+    for column in columns:
+        data[column] = pd.to_numeric(data[column], errors="coerce")
+
+    data[columns] = data[columns].fillna(data[columns].mean())
+    standardized = (
+        data[columns] - data[columns].mean()
+    ) / data[columns].std().replace(0, 1)
+
+    target_index = data.index[
+        data["team"].astype(str).str.upper() == code.upper()
+    ]
+
+    if len(target_index) == 0:
+        return pd.DataFrame()
+
+    target = standardized.loc[target_index[0]]
+    data["similarity_distance"] = (
+        (standardized - target) ** 2
+    ).mean(axis=1) ** 0.5
+
+    data = data[data["team"].astype(str).str.upper() != code.upper()]
+
+    return data.nsmallest(
+        limit, "similarity_distance"
+    )[["team", "similarity_distance"]].reset_index(drop=True)
+
+
+
 # ============================================================
 # TEAM PROFILE
 # ============================================================
 
+
 def render_profile():
     code = st.session_state.selected_team
+
     if code not in TEAMS:
         st.warning("Choose a team first.")
         go("TEAMS")
         return
 
     row = get_team_row(code)
+    dna_row = get_team_row(code, team_metrics)
+
     if row is None:
         st.error(f"No ratings found for {code} in the CSV.")
         return
 
+    if dna_row is None:
+        st.error(f"No Team DNA metrics found for {code}.")
+        return
+
     info = TEAMS[code]
+
     if st.session_state.play_entrance:
         effects = {
             "claws": ("THE HUNT IS ON.", "claws"),
@@ -1373,11 +1944,14 @@ def render_profile():
             "speed": ("TOO FAST TO CATCH.", "fx fx-speed"),
             "spotlight": ("THIS IS OUR STAGE.", "fx fx-spotlight"),
         }
+
         tagline, effect_class = effects[info["effect"]]
+
         claws = (
             '<div class="claw c1"></div><div class="claw c2"></div><div class="claw c3"></div>'
             if info["effect"] == "claws" else ""
         )
+
         st.markdown(
             f'<div class="cinematic {effect_class}" style="--team:{info["color"]};--team2:{info["secondary"]}">'
             f'{claws}<div class="intro-content"><div class="intro-kicker">NFL RATINGS / TEAM INTRODUCTION</div>'
@@ -1386,10 +1960,16 @@ def render_profile():
             f'<div class="intro-tag">{tagline}</div></div></div>',
             unsafe_allow_html=True,
         )
+
         st.session_state.play_entrance = False
+
+    # --------------------------------------------------------
+    # TEAM HEADER
+    # --------------------------------------------------------
 
     rank = int(row["rank"])
     overall = float(row["overall_rating"])
+
     st.markdown(
         f'<div class="profile-hero" style="--team:{info["color"]}">'
         f'<div class="micro">NFL RATINGS / TEAM PROFILE / {code} / {info["conf"]} {info["div"]}</div>'
@@ -1400,8 +1980,9 @@ def render_profile():
         f'<div style="text-align:center">{logo(code,220)}</div></div></div>',
         unsafe_allow_html=True,
     )
-    # Current record is calculated from saved weekly game results.
+
     record = get_records()[code]
+
     st.markdown(
         f'<div class="micro" style="margin:15px 0">'
         f'CURRENT SEASON RECORD: '
@@ -1413,22 +1994,34 @@ def render_profile():
         f'</div>',
         unsafe_allow_html=True,
     )
+
     values = [(label, float(row[col])) for label, col, _ in CATEGORIES]
     strongest = max(values, key=lambda item: item[1])
     weakest = min(values, key=lambda item: item[1])
+
     cols = st.columns(3)
+
     with cols[0]:
         metric("STRONGEST CATEGORY", strongest[0])
+
     with cols[1]:
         metric("WEAKEST CATEGORY", weakest[0])
+
     with cols[2]:
         metric("OVERALL RATING", f"{overall:.1f}")
 
+    # --------------------------------------------------------
+    # ATTRIBUTE BREAKDOWN
+    # --------------------------------------------------------
+
     section("ATTRIBUTE BREAKDOWN")
+
     left, right = st.columns([3, 2])
+
     with left:
         for label, col, short in CATEGORIES:
             rating_bar(label, float(row[col]), info["color"])
+
     with right:
         st.markdown(
             '<div class="panel"><div class="micro">TEAM IDENTITY</div>'
@@ -1440,19 +2033,220 @@ def render_profile():
             unsafe_allow_html=True,
         )
 
-    section("HOW THIS TEAM STACKS UP")
-    compare = pd.DataFrame({
-        "Category": [item[0] for item in CATEGORIES],
-        "Team": [float(row[item[1]]) for item in CATEGORIES],
-        "League average": [float(rankings[item[1]].mean()) for item in CATEGORIES],
-    }).set_index("Category")
-    st.bar_chart(compare, height=300)
+    # ========================================================
+    # TEAM DNA
+    # ========================================================
 
-    section("NEAREST RATING NEIGHBORS")
-    neighbors = rankings.assign(gap=(rankings["overall_rating"] - overall).abs())
-    neighbors = neighbors[neighbors["team"] != code].nsmallest(3, "gap")
-    for _, near in neighbors.iterrows():
-        rank_row(near, f"neighbor_{code}_{near['team']}")
+    section("TEAM DNA")
+
+    # --------------------------------------------------------
+    # OFFENSIVE IDENTITY
+    # --------------------------------------------------------
+
+    st.markdown("### OFFENSIVE IDENTITY")
+
+    render_dna_heatmap(
+        "PASSING PERFORMANCE — EPA PER PLAY",
+        [
+            ("Short Left", "dna_off_pass_epa_short_left",
+             "dna_off_pass_plays_short_left"),
+            ("Short Middle", "dna_off_pass_epa_short_middle",
+             "dna_off_pass_plays_short_middle"),
+            ("Short Right", "dna_off_pass_epa_short_right",
+             "dna_off_pass_plays_short_right"),
+            ("Deep Left", "dna_off_pass_epa_deep_left",
+             "dna_off_pass_plays_deep_left"),
+            ("Deep Middle", "dna_off_pass_epa_deep_middle",
+             "dna_off_pass_plays_deep_middle"),
+            ("Deep Right", "dna_off_pass_epa_deep_right",
+             "dna_off_pass_plays_deep_right"),
+        ],
+        dna_row,
+        team_metrics,
+    )
+
+    render_dna_heatmap(
+        "RUSHING PERFORMANCE — EPA PER PLAY",
+        [
+            ("Left", "dna_off_rush_epa_left",
+             "dna_off_rush_plays_left"),
+            ("Middle", "dna_off_rush_epa_middle",
+             "dna_off_rush_plays_middle"),
+            ("Right", "dna_off_rush_epa_right",
+             "dna_off_rush_plays_right"),
+        ],
+        dna_row,
+        team_metrics,
+    )
+
+    # --------------------------------------------------------
+    # DEFENSIVE IDENTITY
+    # --------------------------------------------------------
+
+    st.markdown("### DEFENSIVE IDENTITY")
+
+    render_dna_heatmap(
+        "PASSING DEFENSE — EPA ALLOWED PER PLAY",
+        [
+            ("Short Left", "dna_def_pass_epa_allowed_short_left",
+             "dna_def_pass_plays_short_left"),
+            ("Short Middle", "dna_def_pass_epa_allowed_short_middle",
+             "dna_def_pass_plays_short_middle"),
+            ("Short Right", "dna_def_pass_epa_allowed_short_right",
+             "dna_def_pass_plays_short_right"),
+            ("Deep Left", "dna_def_pass_epa_allowed_deep_left",
+             "dna_def_pass_plays_deep_left"),
+            ("Deep Middle", "dna_def_pass_epa_allowed_deep_middle",
+             "dna_def_pass_plays_deep_middle"),
+            ("Deep Right", "dna_def_pass_epa_allowed_deep_right",
+             "dna_def_pass_plays_deep_right"),
+        ],
+        dna_row,
+        team_metrics,
+        defensive=True,
+    )
+
+    render_dna_heatmap(
+        "RUSHING DEFENSE — EPA ALLOWED PER PLAY",
+        [
+            ("Left", "dna_def_rush_epa_allowed_left",
+             "dna_def_rush_plays_left"),
+            ("Middle", "dna_def_rush_epa_allowed_middle",
+             "dna_def_rush_plays_middle"),
+            ("Right", "dna_def_rush_epa_allowed_right",
+             "dna_def_rush_plays_right"),
+        ],
+        dna_row,
+        team_metrics,
+        defensive=True,
+    )
+
+    # --------------------------------------------------------
+    # SITUATIONAL PERFORMANCE
+    # --------------------------------------------------------
+
+    section("SITUATIONAL PERFORMANCE")
+
+    situation_groups = [
+        {
+            "title": "SITUATIONAL OFFENSE",
+            "stats": [
+                ("Third Down", "dna_third_down_conversion_rate",
+                 "dna_third_down_attempts"),
+                ("Fourth Down", "dna_fourth_down_conversion_rate",
+                 "dna_fourth_down_attempts"),
+                ("Red Zone TD Rate", "dna_red_zone_td_rate",
+                 "dna_red_zone_trips"),
+                ("Red Zone Scoring", "dna_red_zone_scoring_rate",
+                 "dna_red_zone_trips"),
+            ],
+        },
+        {
+            "title": "SITUATIONAL DEFENSE",
+            "stats": [
+                ("Third Down Allowed", "dna_third_down_conversion_rate_allowed",
+                 "dna_third_down_attempts_allowed"),
+                ("Fourth Down Allowed", "dna_fourth_down_conversion_rate_allowed",
+                 "dna_fourth_down_attempts_allowed"),
+                ("Red Zone TD Rate Allowed", "dna_red_zone_td_rate_allowed",
+                 "dna_red_zone_trips_allowed"),
+                ("Red Zone Scoring Allowed", "dna_red_zone_scoring_rate_allowed",
+                 "dna_red_zone_trips_allowed"),
+            ],
+        },
+    ]
+
+    for group in situation_groups:
+        st.markdown(f"### {group['title']}")
+
+        cols = st.columns(4)
+
+        for index, (label, rate_col, attempts_col) in enumerate(group["stats"]):
+            rate = pd.to_numeric(
+                pd.Series([dna_row[rate_col]]), errors="coerce"
+            ).iloc[0]
+
+            attempts = pd.to_numeric(
+                pd.Series([dna_row[attempts_col]]), errors="coerce"
+            ).iloc[0]
+
+            with cols[index]:
+                st.metric(
+                    label,
+                    f"{rate:.1%}" if pd.notna(rate) else "N/A",
+                )
+
+                st.caption(
+                    f"{int(attempts)} attempts/trips"
+                    if pd.notna(attempts) else "Sample unavailable"
+                )
+
+    # --------------------------------------------------------
+    # STATISTICAL STRENGTHS AND WEAKNESSES
+    # --------------------------------------------------------
+
+    section("STATISTICAL STRENGTHS & WEAKNESSES")
+
+    strengths, weaknesses = get_dna_strengths_weaknesses(
+        dna_row, team_metrics
+    )
+
+    def format_dna_value(item):
+        if "rate" in item["label"].lower() or "success" in item["label"].lower():
+            return f"{item['value']:.1%}"
+
+        return f"{item['value']:.2f}"
+
+    left, right = st.columns(2)
+
+    with left:
+        st.markdown("### TOP STRENGTHS")
+
+        for item in strengths:
+            st.markdown(
+                f"**{item['label']}**  \n"
+                f"{format_dna_value(item)} · "
+                f"{item['percentile']:.0f}th percentile"
+            )
+
+    with right:
+        st.markdown("### AREAS TO IMPROVE")
+
+        for item in weaknesses:
+            st.markdown(
+                f"**{item['label']}**  \n"
+                f"{format_dna_value(item)} · "
+                f"{item['percentile']:.0f}th percentile"
+            )
+
+    # --------------------------------------------------------
+    # MOST SIMILAR TEAMS
+    # --------------------------------------------------------
+
+    section("MOST SIMILAR")
+
+    similar_teams = get_most_similar_teams(
+        code, team_metrics, limit=3
+    )
+
+    if similar_teams.empty:
+        st.info("Similar team profiles are not available.")
+
+    else:
+        st.caption(
+            "These teams have the closest statistical profiles "
+            "across offensive tendencies, defensive tendencies, "
+            "efficiency, and situational performance."
+        )
+
+        for _, similar in similar_teams.iterrows():
+            near = get_team_row(similar["team"])
+
+            if near is not None:
+                rank_row(
+                    near,
+                    f"similar_{code}_{similar['team']}"
+                )
 
     if st.button("← BACK TO ALL TEAMS", key="profile_back"):
         go("TEAMS")
@@ -1462,63 +2256,118 @@ def render_profile():
 # POWER RANKINGS
 # ============================================================
 
+
 def render_rankings():
     hero("THE LEAGUE TABLE", "POWER", "RANKINGS.", "32 TEAMS. ONE ORDER. BUILT BY THE RATINGS ENGINE.")
+
     if rankings is None:
         st.error("Rankings CSV could not be loaded.")
         return
 
-    f1, f2, f3 = st.columns([2, 1, 1])
+    sort_options = {
+        "Overall Rating": "overall_rating",
+        "Offense": "offensive_rating",
+        "Defense": "defensive_rating",
+        "Special Teams": "special_teams_rating",
+        "Discipline": "discipline_rating",
+        "On-Field": "on_field_rating",
+    }
+
+    f1, f2, f3, f4 = st.columns([2, 1, 1, 1.5])
+
     with f1:
-        search = st.text_input("SEARCH TEAM", placeholder="Type a team name or abbreviation...")
+        search = st.text_input(
+            "SEARCH TEAM",
+            placeholder="Type a team name or abbreviation..."
+        )
+
     with f2:
-        conference = st.selectbox("CONFERENCE", ["ALL", "AFC", "NFC"])
+        conference = st.selectbox(
+            "CONFERENCE", ["ALL", "AFC", "NFC"]
+        )
+
     with f3:
-        division = st.selectbox("DIVISION", ["ALL", "East", "North", "South", "West"])
+        division = st.selectbox(
+            "DIVISION", ["ALL", "East", "North", "South", "West"]
+        )
+
+    with f4:
+        sort_by = st.selectbox(
+            "SORT RANKINGS BY",
+            list(sort_options.keys())
+        )
 
     data = rankings.copy()
-    data["conference"] = data["team"].map(lambda code: TEAMS.get(code, {}).get("conf", ""))
-    data["division"] = data["team"].map(lambda code: TEAMS.get(code, {}).get("div", ""))
-    data["team_name"] = data["team"].map(lambda code: TEAMS.get(code, {}).get("name", code))
+
+    data["conference"] = data["team"].map(
+        lambda code: TEAMS.get(code, {}).get("conf", "")
+    )
+    data["division"] = data["team"].map(
+        lambda code: TEAMS.get(code, {}).get("div", "")
+    )
+    data["team_name"] = data["team"].map(
+        lambda code: TEAMS.get(code, {}).get("name", code)
+    )
+
+    # Sort the full league before applying filters so ranks
+    # always represent each team's position across all 32 teams.
+    sort_column = sort_options[sort_by]
+
+    data = data.sort_values(
+        sort_column,
+        ascending=False,
+        na_position="last"
+    ).reset_index(drop=True)
+
+    data["display_rank"] = range(1, len(data) + 1)
+
     if conference != "ALL":
         data = data[data["conference"] == conference]
+
     if division != "ALL":
         data = data[data["division"] == division]
+
     if search.strip():
         needle = search.strip().lower()
         data = data[
             data.apply(
-                lambda row: needle in row["team"].lower()
-                or needle in row["team_name"].lower(),
+                lambda row: needle in str(row["team"]).lower()
+                or needle in str(row["team_name"]).lower(),
                 axis=1,
             )
         ]
 
     section(f"RANKED TEAMS / {len(data)} RESULTS")
+
     if data.empty:
         st.info("No teams match those filters.")
         return
 
-    for _, row in data.sort_values("rank").iterrows():
-        rating = float(row["overall_rating"])
+    for _, row in data.iterrows():
+        rating = float(row[sort_column])
+
         tier = (
             "ELITE" if rating >= 65 else
             "CONTENDER" if rating >= 55 else
             "MIDDLE PACK" if rating >= 45 else "REBUILD"
         )
+
         code = str(row["team"])
         info = TEAMS.get(code)
+
         if not info:
             continue
+
         st.markdown(
             f'<div class="rank-row" style="border-left-color:{info["color"]}">'
-            f'<div class="rank-num">#{int(row["rank"]):02d}</div>{logo(code,56)}'
+            f'<div class="rank-num">#{int(row["display_rank"]):02d}</div>{logo(code,56)}'
             f'<div class="rank-name">{html.escape(info["name"].upper())}'
             f'<div class="micro">{info["conf"]} {info["div"]} / '
             f'<span class="tier">{tier}</span></div></div>'
             f'<div class="rank-score">{rating:.1f}</div></div>',
             unsafe_allow_html=True,
         )
+
         if st.button(f"OPEN {code} PROFILE →", key=f"ranking_open_{code}"):
             go("PROFILE", code, True)
 

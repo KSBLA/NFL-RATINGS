@@ -2,6 +2,8 @@
 import sys
 from pathlib import Path
 
+
+
 import polars as pl
 
 
@@ -23,6 +25,15 @@ from data import load_play_by_play, get_scrimmage_plays
 
 from offense import build_offensive_metrics
 from defense import build_defensive_metrics
+
+from Team_DNA import (
+    build_offensive_tendency_metrics,
+    build_defensive_tendency_metrics,
+    build_offensive_situational_metrics,
+    build_defensive_situational_metrics,
+    build_field_zone_performance_metrics,
+)
+
 from special_teams import build_special_teams_metrics
 from penalties import build_penalty_metrics
 from on_field import build_on_field_metrics, build_game_records
@@ -344,6 +355,36 @@ on_field_metrics = build_on_field_metrics(
     pbp
 )
 
+# ---------------------------------------------------------
+# BUILD TEAM DNA METRICS
+# ---------------------------------------------------------
+
+print("\nBUILDING TEAM DNA METRICS")
+
+offensive_tendencies = build_offensive_tendency_metrics(
+    scrimmage
+)
+
+defensive_tendencies = build_defensive_tendency_metrics(
+    scrimmage
+)
+
+offensive_situational = build_offensive_situational_metrics(
+    pbp
+)
+
+defensive_situational = build_defensive_situational_metrics(
+    pbp
+)
+
+field_zone_performance = build_field_zone_performance_metrics(
+    scrimmage
+)
+
+print(f"Offensive tendencies: {offensive_tendencies.height} teams")
+print(f"Defensive tendencies: {defensive_tendencies.height} teams")
+print(f"Situational offense: {offensive_situational.height} teams")
+print(f"Situational defense: {defensive_situational.height} teams")
 
 # ---------------------------------------------------------
 # COMBINE FOUNDATION METRICS
@@ -355,6 +396,11 @@ combined_metrics = (
     .join(special_teams_metrics, on="team", how="inner")
     .join(discipline_metrics, on="team", how="inner")
     .join(on_field_metrics, on="team", how="inner")
+    .join(offensive_tendencies, on="team", how="inner")
+    .join(defensive_tendencies, on="team", how="inner")
+    .join(offensive_situational, on="team", how="inner")
+    .join(defensive_situational, on="team", how="inner")
+    .join(field_zone_performance, on="team", how="inner")
     .sort("team")
 )
 
@@ -586,6 +632,13 @@ overall_ratings.select([
 ]).write_csv(rankings_file)
 
 print(f"\nPower rankings exported to: {rankings_file}")
+
+# Export underlying team metrics for the website
+metrics_file = OUTPUT_DIR / f"team_metrics_{SEASON}.csv"
+
+combined_metrics.write_csv(metrics_file)
+
+print(f"Team metrics exported to: {metrics_file}")
 
 # ---------------------------------------------------------
 # FINISH
