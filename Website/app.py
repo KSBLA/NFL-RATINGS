@@ -1,10 +1,12 @@
 from pathlib import Path
 from datetime import datetime
+
 import hashlib
 import html
 import json
 import urllib.request
 import sys
+
 
 
 import pandas as pd
@@ -24,8 +26,8 @@ st.set_page_config(
 )
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-CSV_PATH = BASE_DIR / "data" / "output" / "nfl_rankings_2026.csv"
-HISTORY_DIR = BASE_DIR / "data" / "history"
+CSV_PATH = BASE_DIR / "Data" / "output" / "nfl_rankings_2026.csv"
+HISTORY_DIR = BASE_DIR / "Data" / "history"
 HISTORY_PATH = HISTORY_DIR / "snapshots.json"
 
 # ============================================================
@@ -38,13 +40,12 @@ SRC_DIR = PROJECT_ROOT / "src"
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
 
-from NFL_Rankings.database import get_games
 
 # ============================================================
 # WEEKLY RESULTS + UPCOMING SCHEDULE STORAGE
 # ============================================================
 
-WEEKLY_DIR = BASE_DIR / "data" / "weekly"
+WEEKLY_DIR = BASE_DIR / "Data" / "weekly"
 RESULTS_PATH = WEEKLY_DIR / "game_results.json"
 SCHEDULE_PATH = WEEKLY_DIR / "schedule.json"
 
@@ -129,7 +130,7 @@ def format_record(code):
 
 def get_standings(conference=None, division=None):
 
-    records = get_database_records(2026)
+    records = get_records()
 
     rows = []
 
@@ -172,10 +173,9 @@ def get_standings(conference=None, division=None):
 
     return standings
 
-
 def get_upcoming_games():
 
-    games = get_games(2026, "scheduled")
+    games = get_schedule()
 
     aliases = {
         "LA": "LAR",
@@ -190,16 +190,22 @@ def get_upcoming_games():
     upcoming = []
 
     for game in games:
-        home = aliases.get(game["home_team"], game["home_team"])
-        away = aliases.get(game["away_team"], game["away_team"])
+        home_team = game.get("home")
+        away_team = game.get("away")
+
+        if not home_team or not away_team:
+            continue
+
+        home = aliases.get(home_team, home_team)
+        away = aliases.get(away_team, away_team)
 
         upcoming.append({
-            "id": game["game_id"],
+            "id": game.get("id", ""),
             "home": home,
             "away": away,
-            "week": game["week"],
-            "date": game["gameday"] or "",
-            "kickoff": game["gametime"] or "",
+            "week": game.get("week", ""),
+            "date": game.get("date", ""),
+            "kickoff": game.get("kickoff", ""),
         })
 
     return sorted(
@@ -209,6 +215,7 @@ def get_upcoming_games():
             game.get("kickoff", ""),
         ),
     )
+
 
 CATEGORIES = [
     ("OFFENSE", "offensive_rating", "OFF"),
@@ -1810,81 +1817,6 @@ def render_methodology():
 # ============================================================
 # DATABASE-POWERED NFL RECORDS
 # ============================================================
-
-def get_database_records(season=2026):
-
-    games = get_games(season, "final")
-
-    records = {
-        code: {
-            "W": 0,
-            "L": 0,
-            "T": 0,
-            "PF": 0,
-            "PA": 0,
-        }
-        for code in TEAMS
-    }
-
-    for game in games:
-
-        aliases = {
-            "LA": "LAR",
-            "JAC": "JAX",
-            "WSH": "WAS",
-            "WFT": "WAS",
-            "OAK": "LV",
-            "SD": "LAC",
-            "STL": "LAR",
-        }
-
-        home = aliases.get(game["home_team"], game["home_team"])
-        away = aliases.get(game["away_team"], game["away_team"])
-
-        if home not in records or away not in records:
-            continue
-
-        home_score = game["home_score"]
-        away_score = game["away_score"]
-
-        if home_score is None or away_score is None:
-            continue
-
-        home_score = int(home_score)
-        away_score = int(away_score)
-
-        records[home]["PF"] += home_score
-        records[home]["PA"] += away_score
-
-        records[away]["PF"] += away_score
-        records[away]["PA"] += home_score
-
-        if home_score > away_score:
-            records[home]["W"] += 1
-            records[away]["L"] += 1
-
-        elif away_score > home_score:
-            records[away]["W"] += 1
-            records[home]["L"] += 1
-
-        else:
-            records[home]["T"] += 1
-            records[away]["T"] += 1
-
-    for code, record in records.items():
-
-        games_played = (
-            record["W"] + record["L"] + record["T"]
-        )
-
-        record["PCT"] = (
-            (record["W"] + record["T"] * 0.5) / games_played
-            if games_played else 0.0
-        )
-
-        record["DIFF"] = record["PF"] - record["PA"]
-
-    return records
 
 
 # ============================================================
