@@ -1,0 +1,27 @@
+
+# Python environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# PyCharm
+.idea/
+
+# Local database
+*.db
+*.sqlite
+*.sqlite3
+
+# Cached data
+Data/cache/
+Data/Cache/
+
+# Secrets
+.env
+.env.*
+.streamlit/secrets.toml
+
+# Temporary files
+*.log
+.DS_Store

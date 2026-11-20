@@ -1,0 +1,329 @@
+[
+  {
+    "captured_at": "2026-11-20T00:20:20",
+    "date": "2026-11-20",
+    "fingerprint": "9d4de0ae81acc228fa773fcc405222d904ce93f97ac733c967c28136ff0c94df",
+    "teams": [
+      {
+        "rank": 1,
+        "team": "SF",
+        "overall_rating": 71.08,
+        "offensive_rating": 89.84,
+        "defensive_rating": 58.76,
+        "special_teams_rating": 34.32,
+        "discipline_rating": 46.77,
+        "on_field_rating": 82.9
+      },
+      {
+        "rank": 2,
+        "team": "JAX",
+        "overall_rating": 71.04,
+        "offensive_rating": 78.73,
+        "defensive_rating": 66.92,
+        "special_teams_rating": 58.27,
+        "discipline_rating": 50.81,
+        "on_field_rating": 75.89
+      },
+      {
+        "rank": 3,
+        "team": "KC",
+        "overall_rating": 69.9,
+        "offensive_rating": 81.73,
+        "defensive_rating": 73.0,
+        "special_teams_rating": 25.69,
+        "discipline_rating": 51.61,
+        "on_field_rating": 73.31
+      },
+      {
+        "rank": 4,
+        "team": "BUF",
+        "overall_rating": 67.68,
+        "offensive_rating": 78.03,
+        "defensive_rating": 51.87,
+        "special_teams_rating": 64.13,
+        "discipline_rating": 17.74,
+        "on_field_rating": 85.65
+      },
+      {
+        "rank": 5,
+        "team": "MIN",
+        "overall_rating": 67.65,
+        "offensive_rating": 28.89,
+        "defensive_rating": 92.11,
+        "special_teams_rating": 74.98,
+        "discipline_rating": 81.45,
+        "on_field_rating": 79.11
+      },
+      {
+        "rank": 6,
+        "team": "DET",
+        "overall_rating": 66.64,
+        "offensive_rating": 75.47,
+        "defensive_rating": 51.18,
+        "special_teams_rating": 65.63,
+        "discipline_rating": 69.35,
+        "on_field_rating": 74.44
+      },
+      {
+        "rank": 7,
+        "team": "CIN",
+        "overall_rating": 64.78,
+        "offensive_rating": 75.29,
+        "defensive_rating": 47.13,
+        "special_teams_rating": 77.73,
+        "discipline_rating": 41.94,
+        "on_field_rating": 72.74
+      },
+      {
+        "rank": 8,
+        "team": "LA",
+        "overall_rating": 60.96,
+        "offensive_rating": 66.35,
+        "defensive_rating": 73.52,
+        "special_teams_rating": 32.16,
+        "discipline_rating": 43.55,
+        "on_field_rating": 54.44
+      },
+      {
+        "rank": 9,
+        "team": "SEA",
+        "overall_rating": 59.61,
+        "offensive_rating": 37.87,
+        "defensive_rating": 84.95,
+        "special_teams_rating": 45.18,
+        "discipline_rating": 50.81,
+        "on_field_rating": 62.82
+      },
+      {
+        "rank": 10,
+        "team": "DEN",
+        "overall_rating": 58.99,
+        "offensive_rating": 47.61,
+        "defensive_rating": 60.81,
+        "special_teams_rating": 50.71,
+        "discipline_rating": 41.94,
+        "on_field_rating": 77.18
+      },
+      {
+        "rank": 11,
+        "team": "PIT",
+        "overall_rating": 57.9,
+        "offensive_rating": 52.16,
+        "defensive_rating": 57.45,
+        "special_teams_rating": 45.76,
+        "discipline_rating": 71.77,
+        "on_field_rating": 67.42
+      },
+      {
+        "rank": 12,
+        "team": "HOU",
+        "overall_rating": 56.51,
+        "offensive_rating": 62.92,
+        "defensive_rating": 59.46,
+        "special_teams_rating": 70.74,
+        "discipline_rating": 28.23,
+        "on_field_rating": 45.24
+      },
+      {
+        "rank": 13,
+        "team": "CHI",
+        "overall_rating": 55.75,
+        "offensive_rating": 53.9,
+        "defensive_rating": 55.84,
+        "special_teams_rating": 50.42,
+        "discipline_rating": 37.1,
+        "on_field_rating": 63.71
+      },
+      {
+        "rank": 14,
+        "team": "TB",
+        "overall_rating": 54.55,
+        "offensive_rating": 28.98,
+        "defensive_rating": 73.61,
+        "special_teams_rating": 58.87,
+        "discipline_rating": 67.74,
+        "on_field_rating": 57.98
+      },
+      {
+        "rank": 15,
+        "team": "GB",
+        "overall_rating": 53.31,
+        "offensive_rating": 42.23,
+        "defensive_rating": 70.5,
+        "special_teams_rating": 41.47,
+        "discipline_rating": 32.26,
+        "on_field_rating": 54.92
+      },
+      {
+        "rank": 16,
+        "team": "CAR",
+        "overall_rating": 52.06,
+        "offensive_rating": 53.95,
+        "defensive_rating": 53.06,
+        "special_teams_rating": 59.02,
+        "discipline_rating": 3.23,
+        "on_field_rating": 55.56
+      },
+      {
+        "rank": 17,
+        "team": "NE",
+        "overall_rating": 50.97,
+        "offensive_rating": 58.42,
+        "defensive_rating": 32.23,
+        "special_teams_rating": 45.97,
+        "discipline_rating": 53.23,
+        "on_field_rating": 66.05
+      },
+      {
+        "rank": 18,
+        "team": "NYG",
+        "overall_rating": 46.45,
+        "offensive_rating": 45.58,
+        "defensive_rating": 51.58,
+        "special_teams_rating": 41.58,
+        "discipline_rating": 40.32,
+        "on_field_rating": 44.52
+      },
+      {
+        "rank": 19,
+        "team": "WAS",
+        "overall_rating": 45.96,
+        "offensive_rating": 52.19,
+        "defensive_rating": 38.32,
+        "special_teams_rating": 39.24,
+        "discipline_rating": 68.55,
+        "on_field_rating": 45.81
+      },
+      {
+        "rank": 20,
+        "team": "CLE",
+        "overall_rating": 44.89,
+        "offensive_rating": 25.84,
+        "defensive_rating": 59.48,
+        "special_teams_rating": 49.97,
+        "discipline_rating": 39.52,
+        "on_field_rating": 49.27
+      },
+      {
+        "rank": 21,
+        "team": "DAL",
+        "overall_rating": 43.51,
+        "offensive_rating": 74.44,
+        "defensive_rating": 16.26,
+        "special_teams_rating": 47.1,
+        "discipline_rating": 25.0,
+        "on_field_rating": 41.37
+      },
+      {
+        "rank": 22,
+        "team": "ATL",
+        "overall_rating": 41.62,
+        "offensive_rating": 44.26,
+        "defensive_rating": 37.98,
+        "special_teams_rating": 42.27,
+        "discipline_rating": 58.06,
+        "on_field_rating": 39.27
+      },
+      {
+        "rank": 23,
+        "team": "NO",
+        "overall_rating": 40.29,
+        "offensive_rating": 38.97,
+        "defensive_rating": 32.87,
+        "special_teams_rating": 45.48,
+        "discipline_rating": 89.52,
+        "on_field_rating": 38.87
+      },
+      {
+        "rank": 24,
+        "team": "BAL",
+        "overall_rating": 40.01,
+        "offensive_rating": 45.31,
+        "defensive_rating": 45.48,
+        "special_teams_rating": 42.63,
+        "discipline_rating": 35.48,
+        "on_field_rating": 26.94
+      },
+      {
+        "rank": 25,
+        "team": "LV",
+        "overall_rating": 38.4,
+        "offensive_rating": 40.58,
+        "defensive_rating": 26.61,
+        "special_teams_rating": 57.42,
+        "discipline_rating": 75.0,
+        "on_field_rating": 35.0
+      },
+      {
+        "rank": 26,
+        "team": "IND",
+        "overall_rating": 35.3,
+        "offensive_rating": 35.45,
+        "defensive_rating": 34.4,
+        "special_teams_rating": 51.76,
+        "discipline_rating": 79.03,
+        "on_field_rating": 20.89
+      },
+      {
+        "rank": 27,
+        "team": "NYJ",
+        "overall_rating": 34.51,
+        "offensive_rating": 44.92,
+        "defensive_rating": 34.4,
+        "special_teams_rating": 40.6,
+        "discipline_rating": 23.39,
+        "on_field_rating": 21.94
+      },
+      {
+        "rank": 28,
+        "team": "TEN",
+        "overall_rating": 32.85,
+        "offensive_rating": 36.02,
+        "defensive_rating": 28.29,
+        "special_teams_rating": 57.1,
+        "discipline_rating": 84.68,
+        "on_field_rating": 14.44
+      },
+      {
+        "rank": 29,
+        "team": "ARI",
+        "overall_rating": 32.61,
+        "offensive_rating": 34.58,
+        "defensive_rating": 32.56,
+        "special_teams_rating": 44.45,
+        "discipline_rating": 31.45,
+        "on_field_rating": 25.81
+      },
+      {
+        "rank": 30,
+        "team": "MIA",
+        "overall_rating": 29.18,
+        "offensive_rating": 34.32,
+        "defensive_rating": 25.26,
+        "special_teams_rating": 45.31,
+        "discipline_rating": 58.06,
+        "on_field_rating": 15.48
+      },
+      {
+        "rank": 31,
+        "team": "PHI",
+        "overall_rating": 28.69,
+        "offensive_rating": 24.02,
+        "defensive_rating": 29.11,
+        "special_teams_rating": 55.94,
+        "discipline_rating": 73.39,
+        "on_field_rating": 13.95
+      },
+      {
+        "rank": 32,
+        "team": "LAC",
+        "overall_rating": 26.38,
+        "offensive_rating": 11.16,
+        "defensive_rating": 44.98,
+        "special_teams_rating": 38.11,
+        "discipline_rating": 29.03,
+        "on_field_rating": 17.1
+      }
+    ]
+  }
+]
