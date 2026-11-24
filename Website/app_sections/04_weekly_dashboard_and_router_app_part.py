@@ -2771,6 +2771,7 @@ else:
             get_team_row=get_team_row,
             get_team_week_row=get_team_week_row,
             load_weekly_award_play_by_play=load_weekly_award_play_by_play,
+            get_weekly_rosters=get_weekly_rosters,
             hero=hero,
             section=section,
             logo=logo,

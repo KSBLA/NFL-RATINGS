@@ -48,6 +48,7 @@ def load_weekly_award_play_by_play(cache_path, modified_time, week, season):
 
     wanted_columns = [
         "week", "season", "posteam",
+        "passer_player_id", "rusher_player_id", "receiver_player_id",
         "passer_player_name", "rusher_player_name", "receiver_player_name",
         "passing_yards", "passing_tds", "pass_touchdown", "complete_pass",
         "pass_attempt", "rushing_yards", "rush_attempt", "rushing_tds",

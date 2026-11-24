@@ -17,6 +17,7 @@ def render_report(
     get_team_row,
     get_team_week_row,
     load_weekly_award_play_by_play,
+    get_weekly_rosters,
     hero,
     section,
     logo,
@@ -324,7 +325,42 @@ def render_report(
         if award_pbp_path.exists()
         else pd.DataFrame()
     )
+
     award_results = {"AFC": [], "NFC": []}
+
+    weekly_rosters = get_weekly_rosters()
+
+    if isinstance(weekly_rosters, pd.DataFrame) and not weekly_rosters.empty:
+        weekly_rosters = weekly_rosters[
+            (pd.to_numeric(weekly_rosters["season"], errors="coerce") == int(NFL_SEASON))
+            & (pd.to_numeric(weekly_rosters["week"], errors="coerce") == int(selected_week))
+        ].copy()
+
+    roster_players = {}
+    roster_team_aliases = {
+        "LA": "LAR",
+        "WSH": "WAS",
+        "JAC": "JAX",
+    }
+    if not weekly_rosters.empty:
+        for _, roster_row in weekly_rosters.iterrows():
+            roster_team = str(roster_row.get("team", "")).upper().strip()
+            roster_team = roster_team_aliases.get(roster_team, roster_team)
+            player_id = str(roster_row.get("gsis_id", "")).strip()
+            player_name = str(roster_row.get("full_name", "")).strip()
+            player_position = str(roster_row.get("position", "")).upper().strip()
+
+            if (
+                roster_team
+                and player_id
+                and player_id.lower() != "nan"
+                and player_name
+                and player_position
+            ):
+                roster_players[(roster_team, player_id)] = {
+                    "name": player_name,
+                    "position": player_position,
+                }
 
     def numeric_sum(frame, column):
         if column not in frame.columns:
@@ -356,84 +392,181 @@ def render_report(
         def top_player(position, conference):
             if pbp_data.empty:
                 return None
+
             role_columns = {
-                "QB": ("passer_player_name", "rusher_player_name"),
-                "RB": ("rusher_player_name", "receiver_player_name"),
-                "WR": ("receiver_player_name",),
+                "QB": ("passer_player_id", "rusher_player_id"),
+                "RB": ("rusher_player_id", "receiver_player_id"),
+                "WR": ("receiver_player_id",),
             }[position]
-            available_roles = [column for column in role_columns if column in pbp_data.columns]
+
+            available_roles = [
+                column for column in role_columns
+                if column in pbp_data.columns
+            ]
+
             if not available_roles:
                 return None
 
             candidates = []
+
             for team, team_frame in pbp_data.groupby("team_code"):
                 if team not in TEAMS or TEAMS[team].get("conf") != conference:
                     continue
-                names = set()
-                for name_col in available_roles:
-                    names.update(
+
+                player_ids = set()
+
+                for id_col in available_roles:
+                    player_ids.update(
                         team_frame.loc[
-                            team_frame[name_col].notna()
-                            & (team_frame[name_col].astype(str).str.strip() != ""), name_col
+                            team_frame[id_col].notna()
+                            & (team_frame[id_col].astype(str).str.strip() != ""),
+                            id_col,
                         ].astype(str).str.strip().tolist()
                     )
-                for name in names:
+
+                for player_id in player_ids:
+                    roster_player = roster_players.get((team, player_id))
+
+                    if roster_player is None:
+                        continue
+
+                    actual_position = roster_player["position"]
+
+                    if position == "QB" and actual_position != "QB":
+                        continue
+                    if position == "RB" and actual_position != "RB":
+                        continue
+                    if position == "WR" and actual_position not in ("WR", "TE"):
+                        continue
+
                     pass_rows = (
-                        team_frame[team_frame["passer_player_name"].astype(str).str.strip() == name]
-                        if "passer_player_name" in team_frame.columns else team_frame.iloc[0:0]
+                        team_frame[
+                            team_frame["passer_player_id"].astype(str).str.strip()
+                            == player_id
+                        ]
+                        if "passer_player_id" in team_frame.columns
+                        else team_frame.iloc[0:0]
                     )
+
                     rush_rows = (
-                        team_frame[team_frame["rusher_player_name"].astype(str).str.strip() == name]
-                        if "rusher_player_name" in team_frame.columns else team_frame.iloc[0:0]
+                        team_frame[
+                            team_frame["rusher_player_id"].astype(str).str.strip()
+                            == player_id
+                        ]
+                        if "rusher_player_id" in team_frame.columns
+                        else team_frame.iloc[0:0]
                     )
+
                     receive_rows = (
-                        team_frame[team_frame["receiver_player_name"].astype(str).str.strip() == name]
-                        if "receiver_player_name" in team_frame.columns else team_frame.iloc[0:0]
+                        team_frame[
+                            team_frame["receiver_player_id"].astype(str).str.strip()
+                            == player_id
+                        ]
+                        if "receiver_player_id" in team_frame.columns
+                        else team_frame.iloc[0:0]
                     )
 
                     pass_yards = numeric_sum(pass_rows, "passing_yards")
                     pass_tds = event_sum(pass_rows, ("passing_tds", "pass_touchdown"))
                     completions = event_sum(pass_rows, ("complete_pass",))
                     attempts = event_sum(pass_rows, ("pass_attempt",))
+
                     rush_yards = numeric_sum(rush_rows, "rushing_yards")
                     rush_attempts = event_sum(rush_rows, ("rush_attempt",))
                     rush_tds = event_sum(rush_rows, ("rushing_tds", "rush_touchdown"))
+
                     catches = event_sum(receive_rows, ("complete_pass",))
                     receiving_yards = numeric_sum(receive_rows, "receiving_yards")
-                    receiving_tds = event_sum(receive_rows, ("receiving_tds", "pass_touchdown"))
+                    receiving_tds = event_sum(
+                        receive_rows, ("receiving_tds", "pass_touchdown")
+                    )
 
                     if position == "QB":
                         volume = attempts
-                        score = pass_yards / 25 + pass_tds * 7 + rush_yards / 15 + rush_tds * 7 + completions * .10
-                        stat_line = (
-                            f"{completions:.0f}/{attempts:.0f} · {pass_yards:,.0f} pass yds · "
-                            f"{pass_tds:.0f} pass TD · {rush_yards:,.0f} rush yds · {rush_tds:.0f} rush TD"
+                        score = (
+                            pass_yards / 25
+                            + pass_tds * 7
+                            + rush_yards / 15
+                            + rush_tds * 7
+                            + completions * .10
                         )
+                        stat_line = (
+                            f"{completions:.0f}/{attempts:.0f} · "
+                            f"{pass_yards:,.0f} pass yds · "
+                            f"{pass_tds:.0f} pass TD · "
+                            f"{rush_yards:,.0f} rush yds · "
+                            f"{rush_tds:.0f} rush TD"
+                        )
+
                     elif position == "RB":
+                        if rush_attempts < 5:
+                            continue
+
                         volume = rush_attempts + catches
-                        score = (rush_yards + receiving_yards) / 20 + rush_tds * 7 + receiving_tds * 7 + rush_attempts * .12 + catches * .45
-                        stat_line = (
-                            f"{rush_attempts:.0f} carries · {rush_yards:,.0f} rush yds · {rush_tds:.0f} rush TD · "
-                            f"{catches:.0f} catches · {receiving_yards:,.0f} rec yds · {receiving_tds:.0f} rec TD"
+                        score = (
+                            (rush_yards + receiving_yards) / 20
+                            + rush_tds * 7
+                            + receiving_tds * 7
+                            + rush_attempts * .12
+                            + catches * .45
                         )
+                        stat_line = (
+                            f"{rush_attempts:.0f} carries · "
+                            f"{rush_yards:,.0f} rush yds · "
+                            f"{rush_tds:.0f} rush TD · "
+                            f"{catches:.0f} catches · "
+                            f"{receiving_yards:,.0f} rec yds · "
+                            f"{receiving_tds:.0f} rec TD"
+                        )
+
                     else:
                         volume = catches
-                        score = receiving_yards / 18 + receiving_tds * 7 + catches * .55
-                        stat_line = f"{catches:.0f} catches · {receiving_yards:,.0f} rec yds · {receiving_tds:.0f} rec TD"
+                        score = (
+                            receiving_yards / 18
+                            + receiving_tds * 7
+                            + catches * .55
+                        )
+                        stat_line = (
+                            f"{catches:.0f} catches · "
+                            f"{receiving_yards:,.0f} rec yds · "
+                            f"{receiving_tds:.0f} rec TD"
+                        )
 
-                    # EPA is supplemental only; the award remains usable when EPA is absent.
-                    relevant_rows = pass_rows if position == "QB" else rush_rows if position == "RB" else receive_rows
+                    relevant_rows = (
+                        pass_rows if position == "QB"
+                        else rush_rows if position == "RB"
+                        else receive_rows
+                    )
+
                     if position == "RB" and not receive_rows.empty:
-                        relevant_rows = pd.concat([rush_rows, receive_rows], axis=0)
-                    epa = numeric_sum(relevant_rows, "epa") if "epa" in relevant_rows.columns else 0.0
+                        relevant_rows = pd.concat(
+                            [rush_rows, receive_rows], axis=0
+                        )
+
+                    epa = (
+                        numeric_sum(relevant_rows, "epa")
+                        if "epa" in relevant_rows.columns
+                        else 0.0
+                    )
+
                     score += epa * 1.5
+
                     if volume <= 0:
                         continue
+
                     candidates.append({
-                        "name": name, "team": team, "score": score,
-                        "stat_line": stat_line, "epa": epa, "position": position,
+                        "name": roster_player["name"],
+                        "team": team,
+                        "score": score,
+                        "stat_line": stat_line,
+                        "epa": epa,
+                        "position": position,
                     })
-            return max(candidates, key=lambda item: item["score"]) if candidates else None
+
+            return max(
+                candidates,
+                key=lambda item: item["score"]
+            ) if candidates else None
 
         for conference in ("AFC", "NFC"):
             for position, label in (("QB", "QUARTERBACK"), ("RB", "RUNNING BACK"), ("WR", "RECEIVER")):
