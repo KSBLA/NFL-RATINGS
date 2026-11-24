@@ -1,6 +1,11 @@
 
 import polars as pl
 
+try:
+    from grade_scale import raw_to_grade
+except ImportError:  # imported as part of the NFL_Rankings package
+    from NFL_Rankings.grade_scale import raw_to_grade
+
 
 # =========================================================
 # SHARED HELPER FUNCTIONS
@@ -1080,6 +1085,7 @@ def build_overall_rating(
     special_teams_ratings,
     discipline_ratings,
     on_field_ratings
+
 ):
     rating_inputs = [
         (offensive_ratings, "offensive_rating"),
@@ -1176,7 +1182,7 @@ def build_overall_rating(
             f"Overall rating must contain 32 teams. Found {overall.height}."
         )
 
-    # Calculate weighted overall rating
+    # Weighted blend of the five pillars ("raw" score, league average = 50)
     overall = overall.with_columns(
         (
             pl.col("offensive_rating") * 0.30
@@ -1184,14 +1190,22 @@ def build_overall_rating(
             + pl.col("special_teams_rating") * 0.10
             + pl.col("discipline_rating") * 0.05
             + pl.col("on_field_rating") * 0.25
-        ).round(2).alias("overall_rating")
+        ).round(2).alias("overall_raw")
+    )
+
+    # Convert the raw blend to the displayed grade (elite teams land 90-95)
+    overall = overall.with_columns(
+        pl.col("overall_raw")
+        .map_elements(raw_to_grade, return_dtype=pl.Float64)
+        .round(2)
+        .alias("overall_rating")
     )
 
     # Rank teams from highest to lowest
     overall = (
         overall
         .sort(
-            ["overall_rating", "team"],
+            ["overall_raw", "team"],
             descending=[True, False]
         )
         .with_row_index("rank", offset=1)
@@ -1206,7 +1220,8 @@ def build_overall_rating(
             "defensive_rating",
             "special_teams_rating",
             "discipline_rating",
-            "on_field_rating"
+            "on_field_rating",
+            "overall_raw"
         ])
     )
 

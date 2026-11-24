@@ -1,4 +1,6 @@
+import os
 import sys
+import time
 from pathlib import Path
 
 import nflreadpy as nfl
@@ -13,9 +15,53 @@ SEASON = 2026
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 SRC_DIR = PROJECT_ROOT / "src"
-CACHE_DIR = PROJECT_ROOT / "data" / "cache"
+CACHE_DIR = PROJECT_ROOT / "Data" / "cache"
 
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
+
+# ---------------------------------------------------------
+# CACHE REFRESH POLICY
+# ---------------------------------------------------------
+# Cached files go stale after CACHE_MAX_AGE_HOURS and are re-downloaded.
+# Force a refresh with `python main.py --refresh` or NFL_FORCE_REFRESH=1.
+
+CACHE_MAX_AGE_HOURS = 6
+
+
+def _force_refresh() -> bool:
+    return (
+        os.environ.get("NFL_FORCE_REFRESH") == "1"
+        or "--refresh" in sys.argv
+    )
+
+
+def _cache_is_fresh(cache_file: Path) -> bool:
+    if not cache_file.exists() or _force_refresh():
+        return False
+    age_hours = (time.time() - cache_file.stat().st_mtime) / 3600
+    return age_hours < CACHE_MAX_AGE_HOURS
+
+
+def _load_with_refresh(cache_file: Path, label: str, download):
+    """Return cached data if fresh, else download. Falls back to the old cache on failure."""
+    if _cache_is_fresh(cache_file):
+        print(f"Loading {label} from cache: {cache_file}")
+        return pl.read_parquet(cache_file)
+
+    print(f"Downloading latest {label}...")
+    try:
+        data = download()
+        data.write_parquet(cache_file)
+        print(f"Saved {label} to cache: {cache_file}")
+        return data
+    except Exception as error:
+        if cache_file.exists():
+            print(
+                f"WARNING: could not refresh {label} ({error}). "
+                f"Using older cached copy: {cache_file}"
+            )
+            return pl.read_parquet(cache_file)
+        raise
 
 if str(SRC_DIR) not in sys.path:
     sys.path.insert(0, str(SRC_DIR))
@@ -27,19 +73,15 @@ from NFL_Rankings.database import get_connection
 # SCHEDULE DATA
 # ---------------------------------------------------------
 
+
 def load_schedule(season: int = SEASON) -> pl.DataFrame:
     cache_file = CACHE_DIR / f"schedule_{season}.parquet"
 
-    if cache_file.exists():
-        print(f"Loading schedule from cache: {cache_file}")
-        schedules = pl.read_parquet(cache_file)
-    else:
-        print(f"Downloading {season} NFL schedule...")
-        schedules = nfl.load_schedules([season])
-        schedules.write_parquet(cache_file)
-        print(f"Saved schedule to cache: {cache_file}")
-
-    return schedules
+    return _load_with_refresh(
+        cache_file,
+        f"{season} NFL schedule",
+        lambda: nfl.load_schedules([season]),
+    )
 
 
 def prepare_games_table() -> None:
@@ -160,19 +202,14 @@ def verify_games(season: int = SEASON) -> None:
 def load_team_stats(season: int = SEASON) -> pl.DataFrame:
     cache_file = CACHE_DIR / f"team_stats_{season}.parquet"
 
-    if cache_file.exists():
-        print(f"Loading team statistics from cache: {cache_file}")
-        stats = pl.read_parquet(cache_file)
-    else:
-        print(f"Downloading {season} weekly team statistics...")
-        stats = nfl.load_team_stats(
+    return _load_with_refresh(
+        cache_file,
+        f"{season} weekly team statistics",
+        lambda: nfl.load_team_stats(
             seasons=[season],
             summary_level="week"
-        )
-        stats.write_parquet(cache_file)
-        print(f"Saved team statistics to cache: {cache_file}")
-
-    return stats
+        ),
+    )
 
 
 # ---------------------------------------------------------
@@ -182,17 +219,17 @@ def load_team_stats(season: int = SEASON) -> pl.DataFrame:
 def load_play_by_play(season: int = SEASON) -> pl.DataFrame:
     cache_file = CACHE_DIR / f"play_by_play_{season}.parquet"
 
-    if cache_file.exists():
-        print(f"Loading play-by-play data from cache: {cache_file}")
-        pbp = pl.read_parquet(cache_file)
-    else:
-        print(f"Downloading {season} play-by-play data...")
-        pbp = nfl.load_pbp(seasons=[season])
-        pbp.write_parquet(cache_file)
-        print(f"Saved play-by-play data to cache: {cache_file}")
+    pbp = _load_with_refresh(
+        cache_file,
+        f"{season} play-by-play data",
+        lambda: nfl.load_pbp(seasons=[season]),
+    )
 
     print(f"Play-by-play rows: {pbp.height:,}")
     print(f"Number of columns: {len(pbp.columns)}")
+
+    if "week" in pbp.columns and pbp.height:
+        print(f"Latest week in play-by-play data: {pbp['week'].max()}")
 
     return pbp
 

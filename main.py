@@ -1,4 +1,3 @@
-
 import sys
 from pathlib import Path
 
@@ -38,6 +37,8 @@ from special_teams import build_special_teams_metrics
 from penalties import build_penalty_metrics
 from on_field import build_on_field_metrics, build_game_records
 
+from grade_scale import SCALE_VERSION
+
 from ratings import (
     build_offensive_rating,
     build_defensive_rating,
@@ -46,6 +47,10 @@ from ratings import (
     build_on_field_rating,
     build_overall_rating,
 )
+
+
+
+
 
 
 # ---------------------------------------------------------
@@ -481,7 +486,8 @@ overall_ratings = build_overall_rating(
 # ---------------------------------------------------------
 
 print("\n" + "=" * 90)
-print(f"2026 NFL POWER RANKINGS — WEEKS 1–10")
+print(f"{SEASON} NFL POWER RANKINGS — DATA THROUGH WEEK "
+      f"{int(pbp.filter(pl.col('week') <= 18)['week'].max())}")
 print("=" * 90)
 
 print(
@@ -546,7 +552,7 @@ formula_audit = overall_ratings.with_columns(
 
 formula_audit = formula_audit.with_columns(
     (
-        pl.col("overall_rating")
+        pl.col("overall_raw")
         - pl.col("independent_overall_rating")
     ).abs().alias("rating_difference")
 )
@@ -611,11 +617,12 @@ print(
     ]).sort("team")
 )
 
+
 # ---------------------------------------------------------
 # EXPORT POWER RANKINGS FOR WEBSITE
 # ---------------------------------------------------------
 
-OUTPUT_DIR = PROJECT_DIR / "data" / "output"
+OUTPUT_DIR = PROJECT_DIR / "Data" / "output"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 rankings_file = OUTPUT_DIR / f"nfl_rankings_{SEASON}.csv"
@@ -629,6 +636,7 @@ overall_ratings.select([
     "special_teams_rating",
     "discipline_rating",
     "on_field_rating",
+    "overall_raw",
 ]).write_csv(rankings_file)
 
 print(f"\nPower rankings exported to: {rankings_file}")
@@ -639,6 +647,24 @@ metrics_file = OUTPUT_DIR / f"team_metrics_{SEASON}.csv"
 combined_metrics.write_csv(metrics_file)
 
 print(f"Team metrics exported to: {metrics_file}")
+
+# Record which week of play-by-play these ratings were built from
+import json
+from datetime import datetime
+
+_reg = pbp.filter(pl.col("season_type") == "REG") if "season_type" in pbp.columns else pbp
+data_through_week = int(_reg["week"].max()) if "week" in _reg.columns and _reg.height else None
+
+meta_file = OUTPUT_DIR / f"nfl_rankings_meta_{SEASON}.json"
+meta_file.write_text(json.dumps({
+    "season": SEASON,
+    "data_through_week": data_through_week,
+    "generated_at": datetime.now().isoformat(timespec="seconds"),
+    "scale_version": SCALE_VERSION,
+}, indent=2))
+
+print(f"Ratings built from data through week {data_through_week}")
+print(f"Rating metadata exported to: {meta_file}")
 
 # ---------------------------------------------------------
 # FINISH

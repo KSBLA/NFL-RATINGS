@@ -9,6 +9,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "Lumen Field",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -21,6 +22,7 @@
     "home_record": "0-1",
     "away_record": "1-0",
     "stadium": "Melbourne Cricket Ground",
+    "broadcast": "Netflix",
     "source": "espn"
   },
   {
@@ -33,6 +35,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "Paycor Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -45,6 +48,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "Ford Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -57,6 +61,7 @@
     "home_record": "0-1",
     "away_record": "1-0",
     "stadium": "Nissan Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -69,6 +74,7 @@
     "home_record": "0-1",
     "away_record": "1-0",
     "stadium": "Lucas Oil Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -81,6 +87,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "Acrisure Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -93,6 +100,7 @@
     "home_record": "0-1",
     "away_record": "1-0",
     "stadium": "Bank of America Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -105,6 +113,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "EverBank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -117,6 +126,7 @@
     "home_record": "0-1",
     "away_record": "1-0",
     "stadium": "Reliant Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -129,6 +139,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "Allegiant Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -141,6 +152,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "U.S. Bank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -153,6 +165,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "Lincoln Financial Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -165,6 +178,7 @@
     "home_record": "0-1",
     "away_record": "1-0",
     "stadium": "SoFi Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -177,6 +191,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "MetLife Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -189,6 +204,7 @@
     "home_record": "1-0",
     "away_record": "0-1",
     "stadium": "Arrowhead Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -201,6 +217,7 @@
     "home_record": "2-0",
     "away_record": "1-1",
     "stadium": "Highmark Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -213,6 +230,7 @@
     "home_record": "0-2",
     "away_record": "1-1",
     "stadium": "Mercedes-Benz Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -225,6 +243,7 @@
     "home_record": "1-1",
     "away_record": "2-0",
     "stadium": "Soldier Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -237,6 +256,7 @@
     "home_record": "0-2",
     "away_record": "2-0",
     "stadium": "Nissan Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -249,6 +269,7 @@
     "home_record": "1-1",
     "away_record": "1-1",
     "stadium": "Gillette Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -261,6 +282,7 @@
     "home_record": "1-1",
     "away_record": "1-1",
     "stadium": "MetLife Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -273,6 +295,7 @@
     "home_record": "0-2",
     "away_record": "1-1",
     "stadium": "Raymond James Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -285,6 +308,7 @@
     "home_record": "1-1",
     "away_record": "1-1",
     "stadium": "M&T Bank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -297,6 +321,7 @@
     "home_record": "0-2",
     "away_record": "2-0",
     "stadium": "Reliant Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -309,6 +334,7 @@
     "home_record": "1-1",
     "away_record": "1-1",
     "stadium": "Empower Field at Mile High",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -321,6 +347,7 @@
     "home_record": "0-2",
     "away_record": "2-0",
     "stadium": "SoFi Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -333,6 +360,7 @@
     "home_record": "1-1",
     "away_record": "0-2",
     "stadium": "AT&T Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -345,6 +373,7 @@
     "home_record": "1-1",
     "away_record": "2-0",
     "stadium": "State Farm Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -357,6 +386,7 @@
     "home_record": "2-0",
     "away_record": "0-2",
     "stadium": "Levi's Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -369,6 +399,7 @@
     "home_record": "2-0",
     "away_record": "0-2",
     "stadium": "Arrowhead Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -381,6 +412,7 @@
     "home_record": "1-1",
     "away_record": "1-1",
     "stadium": "SoFi Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -393,6 +425,7 @@
     "home_record": "1-2",
     "away_record": "1-2",
     "stadium": "Lambeau Field",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -405,6 +438,7 @@
     "home_record": "3-0",
     "away_record": "0-3",
     "stadium": "Highmark Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -417,6 +451,7 @@
     "home_record": "2-1",
     "away_record": "1-2",
     "stadium": "Huntington Bank Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -429,6 +464,7 @@
     "home_record": "2-1",
     "away_record": "1-2",
     "stadium": "Ford Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -441,6 +477,7 @@
     "home_record": "1-2",
     "away_record": "0-3",
     "stadium": "Lucas Oil Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -453,6 +490,7 @@
     "home_record": "0-3",
     "away_record": "3-0",
     "stadium": "Hard Rock Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -465,6 +503,7 @@
     "home_record": "2-1",
     "away_record": "0-3",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -477,6 +516,7 @@
     "home_record": "2-1",
     "away_record": "2-1",
     "stadium": "Acrisure Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -489,6 +529,7 @@
     "home_record": "1-2",
     "away_record": "2-1",
     "stadium": "Northwest Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -501,6 +542,7 @@
     "home_record": "2-1",
     "away_record": "1-2",
     "stadium": "EverBank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -513,6 +555,7 @@
     "home_record": "3-0",
     "away_record": "1-2",
     "stadium": "Levi's Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -525,6 +568,7 @@
     "home_record": "0-3",
     "away_record": "3-0",
     "stadium": "Raymond James Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -537,6 +581,7 @@
     "home_record": "1-2",
     "away_record": "2-1",
     "stadium": "Maracan\u00e3 Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -549,6 +594,7 @@
     "home_record": "1-2",
     "away_record": "3-0",
     "stadium": "Caesars Superdome",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -561,6 +607,7 @@
     "home_record": "2-1",
     "away_record": "1-2",
     "stadium": "Empower Field at Mile High",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -573,6 +620,7 @@
     "home_record": "2-1",
     "away_record": "2-1",
     "stadium": "Soldier Field",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -585,6 +633,7 @@
     "home_record": "3-1",
     "away_record": "2-2",
     "stadium": "Huntington Bank Field",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -597,6 +646,7 @@
     "home_record": "1-3",
     "away_record": "2-2",
     "stadium": "Tottenham Hotspur Stadium",
+    "broadcast": "NFL Net",
     "source": "espn"
   },
   {
@@ -609,6 +659,7 @@
     "home_record": "3-1",
     "away_record": "2-2",
     "stadium": "Highmark Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -621,6 +672,7 @@
     "home_record": "3-1",
     "away_record": "1-3",
     "stadium": "Soldier Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -633,6 +685,7 @@
     "home_record": "2-2",
     "away_record": "3-1",
     "stadium": "Paycor Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -645,6 +698,7 @@
     "home_record": "3-1",
     "away_record": "1-3",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -657,6 +711,7 @@
     "home_record": "2-2",
     "away_record": "2-2",
     "stadium": "Lincoln Financial Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -669,6 +724,7 @@
     "home_record": "0-4",
     "away_record": "2-2",
     "stadium": "Raymond James Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -681,6 +737,7 @@
     "home_record": "3-1",
     "away_record": "0-4",
     "stadium": "M&T Bank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -693,6 +750,7 @@
     "home_record": "0-4",
     "away_record": "2-2",
     "stadium": "Reliant Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -705,6 +763,7 @@
     "home_record": "4-0",
     "away_record": "0-4",
     "stadium": "U.S. Bank Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -717,6 +776,7 @@
     "home_record": "3-1",
     "away_record": "4-0",
     "stadium": "Allegiant Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -729,6 +789,7 @@
     "home_record": "4-0",
     "away_record": "2-2",
     "stadium": "Levi's Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -741,6 +802,7 @@
     "home_record": "3-1",
     "away_record": "0-4",
     "stadium": "Lumen Field",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -753,6 +815,7 @@
     "home_record": "2-2",
     "away_record": "2-2",
     "stadium": "Bank of America Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -765,6 +828,7 @@
     "home_record": "1-3",
     "away_record": "2-2",
     "stadium": "Caesars Superdome",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -777,6 +841,7 @@
     "home_record": "2-3",
     "away_record": "1-4",
     "stadium": "AT&T Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -789,6 +854,7 @@
     "home_record": "4-1",
     "away_record": "2-3",
     "stadium": "Tottenham Hotspur Stadium",
+    "broadcast": "NFL Net",
     "source": "espn"
   },
   {
@@ -801,6 +867,7 @@
     "home_record": "3-2",
     "away_record": "3-2",
     "stadium": "Lambeau Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -813,6 +880,7 @@
     "home_record": "0-5",
     "away_record": "1-4",
     "stadium": "Nissan Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -825,6 +893,7 @@
     "home_record": "0-5",
     "away_record": "3-2",
     "stadium": "Hard Rock Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -837,6 +906,7 @@
     "home_record": "3-2",
     "away_record": "3-2",
     "stadium": "Gillette Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -849,6 +919,7 @@
     "home_record": "1-4",
     "away_record": "5-0",
     "stadium": "Caesars Superdome",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -861,6 +932,7 @@
     "home_record": "2-3",
     "away_record": "3-2",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -873,6 +945,7 @@
     "home_record": "3-2",
     "away_record": "2-3",
     "stadium": "Acrisure Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -885,6 +958,7 @@
     "home_record": "1-3-1",
     "away_record": "3-1-1",
     "stadium": "Northwest Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -897,6 +971,7 @@
     "home_record": "0-5",
     "away_record": "3-2",
     "stadium": "SoFi Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -909,6 +984,7 @@
     "home_record": "1-4",
     "away_record": "3-2",
     "stadium": "State Farm Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -921,6 +997,7 @@
     "home_record": "3-2",
     "away_record": "5-0",
     "stadium": "Lumen Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -933,6 +1010,7 @@
     "home_record": "2-3",
     "away_record": "4-1",
     "stadium": "Mercedes-Benz Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -945,6 +1023,7 @@
     "home_record": "2-3",
     "away_record": "4-1",
     "stadium": "SoFi Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -957,6 +1036,7 @@
     "home_record": "4-2",
     "away_record": "3-3",
     "stadium": "Empower Field at Mile High",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -969,6 +1049,7 @@
     "home_record": "4-2",
     "away_record": "2-4",
     "stadium": "Wembley Stadium",
+    "broadcast": "NFL Net",
     "source": "espn"
   },
   {
@@ -981,6 +1062,7 @@
     "home_record": "2-4",
     "away_record": "4-2",
     "stadium": "Mercedes-Benz Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -993,6 +1075,7 @@
     "home_record": "4-2",
     "away_record": "4-2",
     "stadium": "Huntington Bank Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1005,6 +1088,7 @@
     "home_record": "2-4",
     "away_record": "1-5",
     "stadium": "Lucas Oil Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1017,6 +1101,7 @@
     "home_record": "4-2",
     "away_record": "2-4",
     "stadium": "Gillette Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1029,6 +1114,7 @@
     "home_record": "3-2-1",
     "away_record": "2-4",
     "stadium": "MetLife Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1041,6 +1127,7 @@
     "home_record": "2-4",
     "away_record": "3-2",
     "stadium": "Lincoln Financial Field",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1053,6 +1140,7 @@
     "home_record": "1-5",
     "away_record": "4-2",
     "stadium": "Raymond James Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1065,6 +1153,7 @@
     "home_record": "2-4",
     "away_record": "2-4",
     "stadium": "SoFi Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1077,6 +1166,7 @@
     "home_record": "5-0",
     "away_record": "0-6",
     "stadium": "Arrowhead Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1089,6 +1179,7 @@
     "home_record": "3-3",
     "away_record": "5-1",
     "stadium": "Allegiant Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1101,6 +1192,7 @@
     "home_record": "4-2",
     "away_record": "2-4",
     "stadium": "Lambeau Field",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -1113,6 +1205,7 @@
     "home_record": "6-0",
     "away_record": "1-4-1",
     "stadium": "Levi's Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -1125,6 +1218,7 @@
     "home_record": "5-2",
     "away_record": "4-3",
     "stadium": "Soldier Field",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -1137,6 +1231,7 @@
     "home_record": "2-5",
     "away_record": "5-2",
     "stadium": "Stade de France",
+    "broadcast": "NFL Net",
     "source": "espn"
   },
   {
@@ -1149,6 +1244,7 @@
     "home_record": "3-4",
     "away_record": "6-1",
     "stadium": "Mercedes-Benz Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1161,6 +1257,7 @@
     "home_record": "1-6",
     "away_record": "5-2",
     "stadium": "Nissan Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1173,6 +1270,7 @@
     "home_record": "6-0",
     "away_record": "2-5",
     "stadium": "U.S. Bank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1185,6 +1283,7 @@
     "home_record": "2-5",
     "away_record": "1-5",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1197,6 +1296,7 @@
     "home_record": "3-3",
     "away_record": "2-5",
     "stadium": "Bank of America Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1209,6 +1309,7 @@
     "home_record": "4-3",
     "away_record": "4-2",
     "stadium": "M&T Bank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1221,6 +1322,7 @@
     "home_record": "2-5",
     "away_record": "4-2-1",
     "stadium": "Reliant Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1233,6 +1335,7 @@
     "home_record": "2-5",
     "away_record": "5-2",
     "stadium": "State Farm Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1245,6 +1348,7 @@
     "home_record": "4-2",
     "away_record": "4-3",
     "stadium": "Ford Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1257,6 +1361,7 @@
     "home_record": "3-4",
     "away_record": "3-4",
     "stadium": "Allegiant Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1269,6 +1374,7 @@
     "home_record": "4-3",
     "away_record": "5-1",
     "stadium": "Lumen Field",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -1281,6 +1387,7 @@
     "home_record": "2-5",
     "away_record": "3-4",
     "stadium": "Lincoln Financial Field",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -1293,6 +1400,7 @@
     "home_record": "5-3",
     "away_record": "3-4",
     "stadium": "Lambeau Field",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -1305,6 +1413,7 @@
     "home_record": "6-1",
     "away_record": "4-4",
     "stadium": "Highmark Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1317,6 +1426,7 @@
     "home_record": "5-2",
     "away_record": "1-7",
     "stadium": "Paycor Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1329,6 +1439,7 @@
     "home_record": "3-5",
     "away_record": "3-5",
     "stadium": "AT&T Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1341,6 +1452,7 @@
     "home_record": "5-2",
     "away_record": "6-1",
     "stadium": "Ford Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1353,6 +1465,7 @@
     "home_record": "2-6",
     "away_record": "4-4",
     "stadium": "MetLife Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1365,6 +1478,7 @@
     "home_record": "6-2",
     "away_record": "5-3",
     "stadium": "Acrisure Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1377,6 +1491,7 @@
     "home_record": "3-5",
     "away_record": "3-5",
     "stadium": "Raymond James Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1389,6 +1504,7 @@
     "home_record": "5-2",
     "away_record": "2-6",
     "stadium": "EverBank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1401,6 +1517,7 @@
     "home_record": "4-4",
     "away_record": "0-7",
     "stadium": "SoFi Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1413,6 +1530,7 @@
     "home_record": "6-2",
     "away_record": "5-2",
     "stadium": "Empower Field at Mile High",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1425,6 +1543,7 @@
     "home_record": "1-6",
     "away_record": "5-3",
     "stadium": "Hard Rock Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1437,6 +1556,7 @@
     "home_record": "2-4-1",
     "away_record": "2-6",
     "stadium": "Northwest Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -1449,6 +1569,7 @@
     "home_record": "4-4",
     "away_record": "6-2",
     "stadium": "Lumen Field",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -1461,6 +1582,7 @@
     "home_record": "4-5",
     "away_record": "6-2",
     "stadium": "M&T Bank Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -1473,6 +1595,7 @@
     "home_record": "3-6",
     "away_record": "6-2",
     "stadium": "Santiago Bernab\u00e9u",
+    "broadcast": "NFL Net",
     "source": "espn"
   },
   {
@@ -1485,6 +1608,7 @@
     "home_record": "2-7",
     "away_record": "4-5",
     "stadium": "Lucas Oil Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1497,6 +1621,7 @@
     "home_record": "6-2",
     "away_record": "2-7",
     "stadium": "Arrowhead Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1509,6 +1634,7 @@
     "home_record": "1-7",
     "away_record": "6-2",
     "stadium": "Hard Rock Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1521,6 +1647,7 @@
     "home_record": "3-5",
     "away_record": "5-4",
     "stadium": "Caesars Superdome",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1533,6 +1660,7 @@
     "home_record": "2-7",
     "away_record": "5-2-1",
     "stadium": "Lincoln Financial Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1545,6 +1673,7 @@
     "home_record": "2-5-1",
     "away_record": "5-4",
     "stadium": "Northwest Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1557,6 +1686,7 @@
     "home_record": "3-5",
     "away_record": "7-2",
     "stadium": "Bank of America Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1569,6 +1699,7 @@
     "home_record": "0-8",
     "away_record": "3-5",
     "stadium": "SoFi Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1581,6 +1712,7 @@
     "home_record": "5-4",
     "away_record": "6-3",
     "stadium": "Gillette Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1593,6 +1725,7 @@
     "home_record": "7-1",
     "away_record": "4-5",
     "stadium": "Levi's Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1605,6 +1738,7 @@
     "home_record": "5-4",
     "away_record": "3-6",
     "stadium": "Lumen Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1617,6 +1751,7 @@
     "home_record": "7-2",
     "away_record": "3-6",
     "stadium": "Soldier Field",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -1629,6 +1764,7 @@
     "home_record": "6-2",
     "away_record": "7-1",
     "stadium": "U.S. Bank Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -1641,6 +1777,7 @@
     "home_record": "5-3-1",
     "away_record": "3-5-1",
     "stadium": "MetLife Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -1653,6 +1790,7 @@
     "home_record": "7-2",
     "away_record": "5-5",
     "stadium": "FC Bayern Munich Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1665,6 +1803,7 @@
     "home_record": "3-7",
     "away_record": "7-2",
     "stadium": "Mercedes-Benz Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1677,6 +1816,7 @@
     "home_record": "6-4",
     "away_record": "3-6",
     "stadium": "Huntington Bank Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1689,6 +1829,7 @@
     "home_record": "6-4",
     "away_record": "7-2",
     "stadium": "Lambeau Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1701,6 +1842,7 @@
     "home_record": "1-8",
     "away_record": "7-2",
     "stadium": "Nissan Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1713,6 +1855,7 @@
     "home_record": "3-7",
     "away_record": "1-8",
     "stadium": "Lucas Oil Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1725,6 +1868,7 @@
     "home_record": "3-6",
     "away_record": "4-5",
     "stadium": "Caesars Superdome",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1737,6 +1881,7 @@
     "home_record": "2-8",
     "away_record": "8-1",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1749,6 +1894,7 @@
     "home_record": "4-6",
     "away_record": "6-4",
     "stadium": "Allegiant Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1761,6 +1907,7 @@
     "home_record": "3-7",
     "away_record": "6-4",
     "stadium": "State Farm Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1773,6 +1920,7 @@
     "home_record": "4-6",
     "away_record": "8-1",
     "stadium": "AT&T Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1785,6 +1933,7 @@
     "home_record": "7-2",
     "away_record": "6-3",
     "stadium": "Paycor Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -1797,6 +1946,7 @@
     "home_record": "4-6",
     "away_record": "1-8",
     "stadium": "M&T Bank Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -1809,6 +1959,7 @@
     "home_record": "4-6",
     "away_record": "3-8",
     "stadium": "Reliant Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -1818,9 +1969,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "BUF",
     "away": "MIA",
-    "home_record": "8-1",
-    "away_record": "1-8",
+    "home_record": "9-1",
+    "away_record": "1-9",
     "stadium": "Highmark Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1830,9 +1982,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "CHI",
     "away": "NO",
-    "home_record": "7-2",
-    "away_record": "3-6",
+    "home_record": "8-2",
+    "away_record": "3-7",
     "stadium": "Soldier Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1842,9 +1995,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "DAL",
     "away": "TEN",
-    "home_record": "4-6",
-    "away_record": "1-8",
+    "home_record": "5-6",
+    "away_record": "1-9",
     "stadium": "AT&T Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1854,9 +2008,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "DET",
     "away": "TB",
-    "home_record": "7-2",
-    "away_record": "3-6",
+    "home_record": "8-2",
+    "away_record": "3-7",
     "stadium": "Ford Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1866,9 +2021,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "KC",
     "away": "ARI",
-    "home_record": "7-2",
-    "away_record": "3-7",
+    "home_record": "8-2",
+    "away_record": "3-8",
     "stadium": "Arrowhead Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1878,9 +2034,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "PHI",
     "away": "PIT",
-    "home_record": "2-7",
-    "away_record": "6-3",
+    "home_record": "3-7",
+    "away_record": "6-4",
     "stadium": "Lincoln Financial Field",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1890,9 +2047,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "CAR",
     "away": "BAL",
-    "home_record": "4-5",
-    "away_record": "4-6",
+    "home_record": "5-5",
+    "away_record": "4-7",
     "stadium": "Bank of America Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1902,9 +2060,10 @@
     "kickoff": "04:05 PM Eastern Standard Time",
     "home": "LAC",
     "away": "NYJ",
-    "home_record": "1-8",
-    "away_record": "2-8",
+    "home_record": "1-9",
+    "away_record": "3-8",
     "stadium": "SoFi Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1914,9 +2073,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "DEN",
     "away": "LV",
-    "home_record": "7-2",
-    "away_record": "4-6",
+    "home_record": "8-2",
+    "away_record": "4-7",
     "stadium": "Empower Field at Mile High",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1926,9 +2086,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "NYG",
     "away": "JAX",
-    "home_record": "5-3-1",
-    "away_record": "7-2",
+    "home_record": "6-3-1",
+    "away_record": "7-3",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1938,9 +2099,10 @@
     "kickoff": "08:20 PM Eastern Standard Time",
     "home": "SF",
     "away": "MIN",
-    "home_record": "8-1",
-    "away_record": "7-2",
+    "home_record": "9-1",
+    "away_record": "7-3",
     "stadium": "Estadio Banorte",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -1950,9 +2112,10 @@
     "kickoff": "08:15 PM Eastern Standard Time",
     "home": "WAS",
     "away": "CIN",
-    "home_record": "3-5-1",
-    "away_record": "7-2",
+    "home_record": "4-5-1",
+    "away_record": "7-3",
     "stadium": "Northwest Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -1965,6 +2128,7 @@
     "home_record": "6-4",
     "away_record": "6-4",
     "stadium": "SoFi Stadium",
+    "broadcast": "Netflix",
     "source": "espn"
   },
   {
@@ -1974,9 +2138,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "DET",
     "away": "CHI",
-    "home_record": "7-2",
-    "away_record": "7-2",
+    "home_record": "8-2",
+    "away_record": "8-2",
     "stadium": "Ford Field",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -1986,9 +2151,10 @@
     "kickoff": "04:30 PM Eastern Standard Time",
     "home": "DAL",
     "away": "PHI",
-    "home_record": "4-6",
-    "away_record": "2-7",
+    "home_record": "5-6",
+    "away_record": "3-7",
     "stadium": "AT&T Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -1998,9 +2164,10 @@
     "kickoff": "08:20 PM Eastern Standard Time",
     "home": "BUF",
     "away": "KC",
-    "home_record": "8-1",
-    "away_record": "7-2",
+    "home_record": "9-1",
+    "away_record": "8-2",
     "stadium": "Highmark Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -2010,9 +2177,10 @@
     "kickoff": "03:00 PM Eastern Standard Time",
     "home": "PIT",
     "away": "DEN",
-    "home_record": "6-3",
-    "away_record": "7-2",
+    "home_record": "6-4",
+    "away_record": "8-2",
     "stadium": "Acrisure Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -2022,9 +2190,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "CIN",
     "away": "NO",
-    "home_record": "7-2",
-    "away_record": "3-6",
+    "home_record": "7-3",
+    "away_record": "3-7",
     "stadium": "Paycor Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2035,8 +2204,9 @@
     "home": "IND",
     "away": "NYG",
     "home_record": "3-8",
-    "away_record": "5-3-1",
+    "away_record": "6-3-1",
     "stadium": "Lucas Oil Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2046,9 +2216,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "MIA",
     "away": "NYJ",
-    "home_record": "1-8",
-    "away_record": "2-8",
+    "home_record": "1-9",
+    "away_record": "3-8",
     "stadium": "Hard Rock Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2058,9 +2229,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "MIN",
     "away": "ATL",
-    "home_record": "7-2",
+    "home_record": "7-3",
     "away_record": "3-7",
     "stadium": "U.S. Bank Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2070,9 +2242,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "JAX",
     "away": "TEN",
-    "home_record": "7-2",
-    "away_record": "1-8",
+    "home_record": "7-3",
+    "away_record": "1-9",
     "stadium": "EverBank Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2083,8 +2256,9 @@
     "home": "HOU",
     "away": "BAL",
     "home_record": "4-6",
-    "away_record": "4-6",
+    "away_record": "4-7",
     "stadium": "Reliant Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2094,9 +2268,10 @@
     "kickoff": "04:05 PM Eastern Standard Time",
     "home": "LAC",
     "away": "NE",
-    "home_record": "1-8",
+    "home_record": "1-9",
     "away_record": "5-5",
     "stadium": "SoFi Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2106,9 +2281,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "ARI",
     "away": "WAS",
-    "home_record": "3-7",
-    "away_record": "3-5-1",
+    "home_record": "3-8",
+    "away_record": "4-5-1",
     "stadium": "State Farm Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2118,9 +2294,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "SF",
     "away": "SEA",
-    "home_record": "8-1",
+    "home_record": "9-1",
     "away_record": "6-4",
     "stadium": "Levi's Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2131,8 +2308,9 @@
     "home": "CLE",
     "away": "LV",
     "home_record": "6-4",
-    "away_record": "4-6",
+    "away_record": "4-7",
     "stadium": "Huntington Bank Field",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -2142,9 +2320,10 @@
     "kickoff": "08:15 PM Eastern Standard Time",
     "home": "TB",
     "away": "CAR",
-    "home_record": "3-6",
-    "away_record": "4-5",
+    "home_record": "3-7",
+    "away_record": "5-5",
     "stadium": "Raymond James Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -2155,8 +2334,9 @@
     "home": "LAR",
     "away": "KC",
     "home_record": "6-4",
-    "away_record": "7-2",
+    "away_record": "8-2",
     "stadium": "SoFi Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -2167,8 +2347,9 @@
     "home": "ATL",
     "away": "DET",
     "home_record": "3-7",
-    "away_record": "7-2",
+    "away_record": "8-2",
     "stadium": "Mercedes-Benz Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2178,9 +2359,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "CHI",
     "away": "JAX",
-    "home_record": "7-2",
-    "away_record": "7-2",
+    "home_record": "8-2",
+    "away_record": "7-3",
     "stadium": "Soldier Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2191,8 +2373,9 @@
     "home": "CLE",
     "away": "CIN",
     "home_record": "6-4",
-    "away_record": "7-2",
+    "away_record": "7-3",
     "stadium": "Huntington Bank Field",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2202,9 +2385,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "TEN",
     "away": "WAS",
-    "home_record": "1-8",
-    "away_record": "3-5-1",
+    "home_record": "1-9",
+    "away_record": "4-5-1",
     "stadium": "Nissan Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2214,9 +2398,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "NO",
     "away": "GB",
-    "home_record": "3-6",
+    "home_record": "3-7",
     "away_record": "6-4",
     "stadium": "Caesars Superdome",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2226,9 +2411,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "NYG",
     "away": "SF",
-    "home_record": "5-3-1",
-    "away_record": "8-1",
+    "home_record": "6-3-1",
+    "away_record": "9-1",
     "stadium": "MetLife Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2238,9 +2424,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "TB",
     "away": "LAC",
-    "home_record": "3-6",
-    "away_record": "1-8",
+    "home_record": "3-7",
+    "away_record": "1-9",
     "stadium": "Raymond James Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2250,9 +2437,10 @@
     "kickoff": "04:05 PM Eastern Standard Time",
     "home": "DEN",
     "away": "MIA",
-    "home_record": "7-2",
-    "away_record": "1-8",
+    "home_record": "8-2",
+    "away_record": "1-9",
     "stadium": "Empower Field at Mile High",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2262,9 +2450,10 @@
     "kickoff": "04:05 PM Eastern Standard Time",
     "home": "ARI",
     "away": "PHI",
-    "home_record": "3-7",
-    "away_record": "2-7",
+    "home_record": "3-8",
+    "away_record": "3-7",
     "stadium": "State Farm Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2274,9 +2463,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "MIN",
     "away": "CAR",
-    "home_record": "7-2",
-    "away_record": "4-5",
+    "home_record": "7-3",
+    "away_record": "5-5",
     "stadium": "U.S. Bank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2287,8 +2477,9 @@
     "home": "NE",
     "away": "BUF",
     "home_record": "5-5",
-    "away_record": "8-1",
+    "away_record": "9-1",
     "stadium": "Gillette Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2298,9 +2489,10 @@
     "kickoff": "08:20 PM Eastern Standard Time",
     "home": "PIT",
     "away": "HOU",
-    "home_record": "6-3",
+    "home_record": "6-4",
     "away_record": "4-6",
     "stadium": "Acrisure Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -2311,8 +2503,9 @@
     "home": "SEA",
     "away": "DAL",
     "home_record": "6-4",
-    "away_record": "4-6",
+    "away_record": "5-6",
     "stadium": "Lumen Field",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -2323,8 +2516,9 @@
     "home": "NE",
     "away": "MIN",
     "home_record": "5-5",
-    "away_record": "7-2",
+    "away_record": "7-3",
     "stadium": "Gillette Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -2337,6 +2531,7 @@
     "home_record": "6-4",
     "away_record": "3-7",
     "stadium": "Huntington Bank Field",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2346,9 +2541,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "DET",
     "away": "TEN",
-    "home_record": "7-2",
-    "away_record": "1-8",
+    "home_record": "8-2",
+    "away_record": "1-9",
     "stadium": "Ford Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2358,9 +2554,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "MIA",
     "away": "CHI",
-    "home_record": "1-8",
-    "away_record": "7-2",
+    "home_record": "1-9",
+    "away_record": "8-2",
     "stadium": "Hard Rock Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2370,9 +2567,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "NYJ",
     "away": "DEN",
-    "home_record": "2-8",
-    "away_record": "7-2",
+    "home_record": "3-8",
+    "away_record": "8-2",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2382,9 +2580,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "PHI",
     "away": "IND",
-    "home_record": "2-7",
+    "home_record": "3-7",
     "away_record": "3-8",
     "stadium": "Lincoln Financial Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2394,9 +2593,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "WAS",
     "away": "HOU",
-    "home_record": "3-5-1",
+    "home_record": "4-5-1",
     "away_record": "4-6",
     "stadium": "Northwest Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2406,9 +2606,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "CAR",
     "away": "NO",
-    "home_record": "4-5",
-    "away_record": "3-6",
+    "home_record": "5-5",
+    "away_record": "3-7",
     "stadium": "Bank of America Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2418,9 +2619,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "BAL",
     "away": "TB",
-    "home_record": "4-6",
-    "away_record": "3-6",
+    "home_record": "4-7",
+    "away_record": "3-7",
     "stadium": "M&T Bank Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2430,9 +2632,10 @@
     "kickoff": "04:05 PM Eastern Standard Time",
     "home": "LV",
     "away": "LAC",
-    "home_record": "4-6",
-    "away_record": "1-8",
+    "home_record": "4-7",
+    "away_record": "1-9",
     "stadium": "Allegiant Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2442,9 +2645,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "CIN",
     "away": "KC",
-    "home_record": "7-2",
-    "away_record": "7-2",
+    "home_record": "7-3",
+    "away_record": "8-2",
     "stadium": "Paycor Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2454,9 +2658,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "SF",
     "away": "LAR",
-    "home_record": "8-1",
+    "home_record": "9-1",
     "away_record": "6-4",
     "stadium": "Levi's Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2467,8 +2672,9 @@
     "home": "SEA",
     "away": "NYG",
     "home_record": "6-4",
-    "away_record": "5-3-1",
+    "away_record": "6-3-1",
     "stadium": "Lumen Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2479,8 +2685,9 @@
     "home": "GB",
     "away": "BUF",
     "home_record": "6-4",
-    "away_record": "8-1",
+    "away_record": "9-1",
     "stadium": "Lambeau Field",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -2490,9 +2697,10 @@
     "kickoff": "08:15 PM Eastern Standard Time",
     "home": "JAX",
     "away": "PIT",
-    "home_record": "7-2",
-    "away_record": "6-3",
+    "home_record": "7-3",
+    "away_record": "6-4",
     "stadium": "EverBank Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -2502,9 +2710,10 @@
     "kickoff": "08:15 PM Eastern Standard Time",
     "home": "LAC",
     "away": "SF",
-    "home_record": "1-8",
-    "away_record": "8-1",
+    "home_record": "1-9",
+    "away_record": "9-1",
     "stadium": "SoFi Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -2514,9 +2723,10 @@
     "kickoff": "05:00 PM Eastern Standard Time",
     "home": "PHI",
     "away": "SEA",
-    "home_record": "2-7",
+    "home_record": "3-7",
     "away_record": "6-4",
     "stadium": "Lincoln Financial Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2526,9 +2736,10 @@
     "kickoff": "08:20 PM Eastern Standard Time",
     "home": "BUF",
     "away": "CHI",
-    "home_record": "8-1",
-    "away_record": "7-2",
+    "home_record": "9-1",
+    "away_record": "8-2",
     "stadium": "Highmark Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2539,8 +2750,9 @@
     "home": "GB",
     "away": "MIA",
     "home_record": "6-4",
-    "away_record": "1-8",
+    "away_record": "1-9",
     "stadium": "Lambeau Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2550,9 +2762,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "TEN",
     "away": "IND",
-    "home_record": "1-8",
+    "home_record": "1-9",
     "away_record": "3-8",
     "stadium": "Nissan Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2562,9 +2775,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "NYG",
     "away": "CLE",
-    "home_record": "5-3-1",
+    "home_record": "6-3-1",
     "away_record": "6-4",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2574,9 +2788,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "PIT",
     "away": "BAL",
-    "home_record": "6-3",
-    "away_record": "4-6",
+    "home_record": "6-4",
+    "away_record": "4-7",
     "stadium": "Acrisure Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2586,9 +2801,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "TB",
     "away": "NO",
-    "home_record": "3-6",
-    "away_record": "3-6",
+    "home_record": "3-7",
+    "away_record": "3-7",
     "stadium": "Raymond James Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2598,9 +2814,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "WAS",
     "away": "ATL",
-    "home_record": "3-5-1",
+    "home_record": "4-5-1",
     "away_record": "3-7",
     "stadium": "Northwest Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2610,9 +2827,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "CAR",
     "away": "CIN",
-    "home_record": "4-5",
-    "away_record": "7-2",
+    "home_record": "5-5",
+    "away_record": "7-3",
     "stadium": "Bank of America Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2623,8 +2841,9 @@
     "home": "HOU",
     "away": "JAX",
     "home_record": "4-6",
-    "away_record": "7-2",
+    "away_record": "7-3",
     "stadium": "Reliant Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2634,9 +2853,10 @@
     "kickoff": "04:05 PM Eastern Standard Time",
     "home": "ARI",
     "away": "NYJ",
-    "home_record": "3-7",
-    "away_record": "2-8",
+    "home_record": "3-8",
+    "away_record": "3-8",
     "stadium": "State Farm Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2646,9 +2866,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "LV",
     "away": "DEN",
-    "home_record": "4-6",
-    "away_record": "7-2",
+    "home_record": "4-7",
+    "away_record": "8-2",
     "stadium": "Allegiant Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2659,8 +2880,9 @@
     "home": "LAR",
     "away": "DAL",
     "home_record": "6-4",
-    "away_record": "4-6",
+    "away_record": "5-6",
     "stadium": "SoFi Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2670,9 +2892,10 @@
     "kickoff": "08:20 PM Eastern Standard Time",
     "home": "MIN",
     "away": "DET",
-    "home_record": "7-2",
-    "away_record": "7-2",
+    "home_record": "7-3",
+    "away_record": "8-2",
     "stadium": "U.S. Bank Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -2682,9 +2905,10 @@
     "kickoff": "08:15 PM Eastern Standard Time",
     "home": "KC",
     "away": "NE",
-    "home_record": "7-2",
+    "home_record": "8-2",
     "away_record": "5-5",
     "stadium": "Arrowhead Stadium",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -2694,9 +2918,10 @@
     "kickoff": "08:15 PM Eastern Standard Time",
     "home": "PHI",
     "away": "HOU",
-    "home_record": "2-7",
+    "home_record": "3-7",
     "away_record": "4-6",
     "stadium": "Lincoln Financial Field",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -2706,9 +2931,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "CHI",
     "away": "GB",
-    "home_record": "7-2",
+    "home_record": "8-2",
     "away_record": "6-4",
     "stadium": "Soldier Field",
+    "broadcast": "Netflix",
     "source": "espn"
   },
   {
@@ -2718,9 +2944,10 @@
     "kickoff": "04:30 PM Eastern Standard Time",
     "home": "DEN",
     "away": "BUF",
-    "home_record": "7-2",
-    "away_record": "8-1",
+    "home_record": "8-2",
+    "away_record": "9-1",
     "stadium": "Empower Field at Mile High",
+    "broadcast": "Netflix",
     "source": "espn"
   },
   {
@@ -2733,6 +2960,7 @@
     "home_record": "6-4",
     "away_record": "6-4",
     "stadium": "Lumen Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2743,8 +2971,9 @@
     "home": "ATL",
     "away": "TB",
     "home_record": "3-7",
-    "away_record": "3-6",
+    "away_record": "3-7",
     "stadium": "Mercedes-Benz Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -2755,8 +2984,9 @@
     "home": "IND",
     "away": "CIN",
     "home_record": "3-8",
-    "away_record": "7-2",
+    "away_record": "7-3",
     "stadium": "Lucas Oil Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -2766,9 +2996,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "MIN",
     "away": "WAS",
-    "home_record": "7-2",
-    "away_record": "3-5-1",
+    "home_record": "7-3",
+    "away_record": "4-5-1",
     "stadium": "U.S. Bank Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -2778,9 +3009,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "PIT",
     "away": "CAR",
-    "home_record": "6-3",
-    "away_record": "4-5",
+    "home_record": "6-4",
+    "away_record": "5-5",
     "stadium": "Acrisure Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -2790,9 +3022,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "MIA",
     "away": "LAC",
-    "home_record": "1-8",
-    "away_record": "1-8",
+    "home_record": "1-9",
+    "away_record": "1-9",
     "stadium": "Hard Rock Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2802,9 +3035,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "NO",
     "away": "ARI",
-    "home_record": "3-6",
-    "away_record": "3-7",
+    "home_record": "3-7",
+    "away_record": "3-8",
     "stadium": "Caesars Superdome",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2814,9 +3048,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "NYJ",
     "away": "NE",
-    "home_record": "2-8",
+    "home_record": "3-8",
     "away_record": "5-5",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2826,9 +3061,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "BAL",
     "away": "CLE",
-    "home_record": "4-6",
+    "home_record": "4-7",
     "away_record": "6-4",
     "stadium": "M&T Bank Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2838,9 +3074,10 @@
     "kickoff": "04:05 PM Eastern Standard Time",
     "home": "LV",
     "away": "TEN",
-    "home_record": "4-6",
-    "away_record": "1-8",
+    "home_record": "4-7",
+    "away_record": "1-9",
     "stadium": "Allegiant Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2850,9 +3087,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "KC",
     "away": "SF",
-    "home_record": "7-2",
-    "away_record": "8-1",
+    "home_record": "8-2",
+    "away_record": "9-1",
     "stadium": "Arrowhead Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2862,9 +3100,10 @@
     "kickoff": "08:20 PM Eastern Standard Time",
     "home": "DAL",
     "away": "JAX",
-    "home_record": "4-6",
-    "away_record": "7-2",
+    "home_record": "5-6",
+    "away_record": "7-3",
     "stadium": "AT&T Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -2874,9 +3113,10 @@
     "kickoff": "08:15 PM Eastern Standard Time",
     "home": "DET",
     "away": "NYG",
-    "home_record": "7-2",
-    "away_record": "5-3-1",
+    "home_record": "8-2",
+    "away_record": "6-3-1",
     "stadium": "Ford Field",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -2886,9 +3126,10 @@
     "kickoff": "08:15 PM Eastern Standard Time",
     "home": "CIN",
     "away": "BAL",
-    "home_record": "7-2",
-    "away_record": "4-6",
+    "home_record": "7-3",
+    "away_record": "4-7",
     "stadium": "Paycor Stadium",
+    "broadcast": "Prime Video",
     "source": "espn"
   },
   {
@@ -2899,8 +3140,9 @@
     "home": "NE",
     "away": "DEN",
     "home_record": "5-5",
-    "away_record": "7-2",
+    "away_record": "8-2",
     "stadium": "Gillette Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -2910,9 +3152,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "LAC",
     "away": "KC",
-    "home_record": "1-8",
-    "away_record": "7-2",
+    "home_record": "1-9",
+    "away_record": "8-2",
     "stadium": "SoFi Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -2922,9 +3165,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "TB",
     "away": "LAR",
-    "home_record": "3-6",
+    "home_record": "3-7",
     "away_record": "6-4",
     "stadium": "Raymond James Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -2934,9 +3178,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "JAX",
     "away": "WAS",
-    "home_record": "7-2",
-    "away_record": "3-5-1",
+    "home_record": "7-3",
+    "away_record": "4-5-1",
     "stadium": "EverBank Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -2947,8 +3192,9 @@
     "home": "ATL",
     "away": "NO",
     "home_record": "3-7",
-    "away_record": "3-6",
+    "away_record": "3-7",
     "stadium": "Mercedes-Benz Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2961,6 +3207,7 @@
     "home_record": "6-4",
     "away_record": "3-8",
     "stadium": "Huntington Bank Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2970,9 +3217,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "DAL",
     "away": "NYG",
-    "home_record": "4-6",
-    "away_record": "5-3-1",
+    "home_record": "5-6",
+    "away_record": "6-3-1",
     "stadium": "AT&T Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -2982,9 +3230,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "TEN",
     "away": "PIT",
-    "home_record": "1-8",
-    "away_record": "6-3",
+    "home_record": "1-9",
+    "away_record": "6-4",
     "stadium": "Nissan Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -2994,9 +3243,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "MIA",
     "away": "BUF",
-    "home_record": "1-8",
-    "away_record": "8-1",
+    "home_record": "1-9",
+    "away_record": "9-1",
     "stadium": "Hard Rock Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -3006,9 +3256,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "NYJ",
     "away": "MIN",
-    "home_record": "2-8",
-    "away_record": "7-2",
+    "home_record": "3-8",
+    "away_record": "7-3",
     "stadium": "MetLife Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -3018,9 +3269,10 @@
     "kickoff": "01:00 PM Eastern Standard Time",
     "home": "CAR",
     "away": "SEA",
-    "home_record": "4-5",
+    "home_record": "5-5",
     "away_record": "6-4",
     "stadium": "Bank of America Stadium",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -3030,9 +3282,10 @@
     "kickoff": "04:05 PM Eastern Standard Time",
     "home": "ARI",
     "away": "LV",
-    "home_record": "3-7",
-    "away_record": "4-6",
+    "home_record": "3-8",
+    "away_record": "4-7",
     "stadium": "State Farm Stadium",
+    "broadcast": "CBS",
     "source": "espn"
   },
   {
@@ -3042,9 +3295,10 @@
     "kickoff": "04:25 PM Eastern Standard Time",
     "home": "CHI",
     "away": "DET",
-    "home_record": "7-2",
-    "away_record": "7-2",
+    "home_record": "8-2",
+    "away_record": "8-2",
     "stadium": "Soldier Field",
+    "broadcast": "Fox",
     "source": "espn"
   },
   {
@@ -3054,9 +3308,10 @@
     "kickoff": "08:20 PM Eastern Standard Time",
     "home": "SF",
     "away": "PHI",
-    "home_record": "8-1",
-    "away_record": "2-7",
+    "home_record": "9-1",
+    "away_record": "3-7",
     "stadium": "Levi's Stadium",
+    "broadcast": "NBC",
     "source": "espn"
   },
   {
@@ -3069,6 +3324,7 @@
     "home_record": "6-4",
     "away_record": "4-6",
     "stadium": "Lambeau Field",
+    "broadcast": "ESPN",
     "source": "espn"
   },
   {
@@ -3078,9 +3334,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "BUF",
     "away": "NYJ",
-    "home_record": "8-1",
-    "away_record": "2-8",
+    "home_record": "9-1",
+    "away_record": "3-8",
     "stadium": "Highmark Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3090,9 +3347,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "CIN",
     "away": "CLE",
-    "home_record": "7-2",
+    "home_record": "7-3",
     "away_record": "6-4",
     "stadium": "Paycor Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3102,9 +3360,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "DEN",
     "away": "LAC",
-    "home_record": "7-2",
-    "away_record": "1-8",
+    "home_record": "8-2",
+    "away_record": "1-9",
     "stadium": "Empower Field at Mile High",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3115,8 +3374,9 @@
     "home": "GB",
     "away": "DET",
     "home_record": "6-4",
-    "away_record": "7-2",
+    "away_record": "8-2",
     "stadium": "Lambeau Field",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3127,8 +3387,9 @@
     "home": "IND",
     "away": "JAX",
     "home_record": "3-8",
-    "away_record": "7-2",
+    "away_record": "7-3",
     "stadium": "Lucas Oil Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3138,9 +3399,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "KC",
     "away": "LV",
-    "home_record": "7-2",
-    "away_record": "4-6",
+    "home_record": "8-2",
+    "away_record": "4-7",
     "stadium": "Arrowhead Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3153,6 +3415,7 @@
     "home_record": "6-4",
     "away_record": "6-4",
     "stadium": "SoFi Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3162,9 +3425,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "MIN",
     "away": "CHI",
-    "home_record": "7-2",
-    "away_record": "7-2",
+    "home_record": "7-3",
+    "away_record": "8-2",
     "stadium": "U.S. Bank Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3175,8 +3439,9 @@
     "home": "NE",
     "away": "MIA",
     "home_record": "5-5",
-    "away_record": "1-8",
+    "away_record": "1-9",
     "stadium": "Gillette Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3186,9 +3451,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "NO",
     "away": "TB",
-    "home_record": "3-6",
-    "away_record": "3-6",
+    "home_record": "3-7",
+    "away_record": "3-7",
     "stadium": "Caesars Superdome",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3198,9 +3464,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "NYG",
     "away": "PHI",
-    "home_record": "5-3-1",
-    "away_record": "2-7",
+    "home_record": "6-3-1",
+    "away_record": "3-7",
     "stadium": "MetLife Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3210,9 +3477,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "ARI",
     "away": "SF",
-    "home_record": "3-7",
-    "away_record": "8-1",
+    "home_record": "3-8",
+    "away_record": "9-1",
     "stadium": "State Farm Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3222,9 +3490,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "WAS",
     "away": "DAL",
-    "home_record": "3-5-1",
-    "away_record": "4-6",
+    "home_record": "4-5-1",
+    "away_record": "5-6",
     "stadium": "Northwest Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3234,9 +3503,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "CAR",
     "away": "ATL",
-    "home_record": "4-5",
+    "home_record": "5-5",
     "away_record": "3-7",
     "stadium": "Bank of America Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3246,9 +3516,10 @@
     "kickoff": "12:00 AM Eastern Standard Time",
     "home": "BAL",
     "away": "PIT",
-    "home_record": "4-6",
-    "away_record": "6-3",
+    "home_record": "4-7",
+    "away_record": "6-4",
     "stadium": "M&T Bank Stadium",
+    "broadcast": "",
     "source": "espn"
   },
   {
@@ -3259,8 +3530,9 @@
     "home": "HOU",
     "away": "TEN",
     "home_record": "4-6",
-    "away_record": "1-8",
+    "away_record": "1-9",
     "stadium": "Reliant Stadium",
+    "broadcast": "",
     "source": "espn"
   }
 ]

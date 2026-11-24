@@ -25,3 +25,13 @@ Data/Cache/
 # Temporary files
 *.log
 .DS_Store
+
+# Local recovery backups - keep on computer, exclude from repository
+Website/backup_app.py
+Website/backup_app_sections/
+Website/weekly_data_backup.py
+Website/weekly_data_before_merge.py
+/customobject]@{
+
+# Accidental terminal artifact
+/customobject]@{
